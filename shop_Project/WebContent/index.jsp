@@ -20,6 +20,13 @@
 		</div>
 		<!-- end : submenu include -->
 		<h1>메인페이지</h1>
+		
+		<div>
+		
+			<div><a href="">로그인</a></div>
+			<div><a href="">회원가입</a></div>	
+		
+		</div>
 	
 	</body>
 

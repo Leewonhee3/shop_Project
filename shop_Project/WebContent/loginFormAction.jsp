@@ -2,6 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ page import="vo.*" import="dao.*" %>
 <!DOCTYPE html>
+<%
+	request.setCharacterEncoding("utf-8"); //인코딩	
+	//인증 방어 코드 : 로그인 전 session.getAttribute("loginMember") == null 인 경우
+	if(session.getAttribute("loginMember")!=null){
+		System.out.println("이미 로그인 되어 있음");
+		response.sendRedirect("./index.jsp"); //로그인 되면 회원가입 하면 안됨
+		return;
+	}
+%> 
 <html>
 
 	<head>
@@ -44,6 +53,8 @@
 			session.setAttribute("loginMember", returnMember);
 			response.sendRedirect("./index.jsp");
 		}
+		
+		
 	 %>
 	</body>
 

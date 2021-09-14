@@ -12,6 +12,7 @@ public class MemberDao {
 	
 	public void insertMember(Member member) throws SQLException, ClassNotFoundException {
 		DBUtil dbutil = new DBUtil();
+		int check = 0; //실행성공 여부 확인 
 		System.out.println(member.getMemberId()+"<------dao.insertMember - memberId");
 		System.out.println(member.getMemberPw()+"<------dao.insertMember - memberPw");
 		System.out.println(member.getMemberName()+"<------dao.insertMember - memberName");
@@ -30,7 +31,12 @@ public class MemberDao {
 		stmt.setString(5, member.getMemberGender()); //성별		
 		
 		System.out.println(stmt+"<------dao.insertMember - stmt"); //쿼리 및 파라미터 확인
-		stmt.executeUpdate();
+		check = stmt.executeUpdate(); // 확인용
+		if(check == 1) {
+			System.out.println("성공");
+		}else {
+			System.out.println("실패");
+		}
 		stmt.close();
 		conn.close();
 		

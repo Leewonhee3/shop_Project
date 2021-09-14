@@ -2,25 +2,20 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>test page</h1>
 
-	<head>
-
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
-
-	</head>
-
-	<body>
-	
-		<!-- start : submenu include -->
+	<!-- start : submenu include -->
 		<div>
 			
 			<jsp:include page="./partial/submenu.jsp"></jsp:include>
 			
 		</div>
 		<!-- end : submenu include -->
-		<h1>메인페이지</h1>
-	
-	</body>
 
+</body>
 </html>

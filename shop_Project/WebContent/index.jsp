@@ -15,7 +15,7 @@
 		<!-- start : submenu include -->
 		<div>
 			
-			<jsp:include page="./partial/submenu.jsp"></jsp:include>
+			<jsp:include page="/partial/submenu.jsp"></jsp:include>
 			
 		</div>
 		<!-- end : submenu include -->
@@ -23,8 +23,8 @@
 		
 		<div>
 		
-			<div><a href="">로그인</a></div>
-			<div><a href="">회원가입</a></div>	
+			<div><a href="<%=request.getContextPath() %>/loginForm.jsp">로그인</a></div>
+			<div><a href="<%=request.getContextPath() %>/insertMemberForm.jsp">회원가입</a></div>	
 		
 		</div>
 	

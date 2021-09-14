@@ -42,7 +42,7 @@
 		
 		if(returnMember == null){
 			System.out.println("실패");
-			response.sendRedirect("./loginForm.jsp");
+			response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
 			return;
 		}else{
 			System.out.println("성공");
@@ -51,7 +51,7 @@
 			System.out.println(returnMember.getMemberName()+"<---loginFormAction -  returnMember.memberId");
 			System.out.println(returnMember.getMemberLevel()+"<---loginFormAction -  returnMember.memberId");
 			session.setAttribute("loginMember", returnMember);
-			response.sendRedirect("./index.jsp");
+			response.sendRedirect(request.getContextPath()+"/index.jsp");
 		}
 		
 		

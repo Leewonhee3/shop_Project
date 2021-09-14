@@ -19,7 +19,7 @@
 	
 	if(request.getParameter("memberId").equals("")||request.getParameter("memberPw").equals("")||request.getParameter("memberName").equals("")||request.getParameter("memberAge").equals("")||request.getParameter("memberGender").equals("")){
 		System.out.println("입력값 공백");
-		response.sendRedirect("./insertMemberForm.jsp"); //입력값이 빈경우
+		response.sendRedirect(request.getContextPath()+"/insertMemberForm.jsp"); //입력값이 빈경우
 		return;
 	}
 %> 

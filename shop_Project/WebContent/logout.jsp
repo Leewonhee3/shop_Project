@@ -14,7 +14,7 @@
 
 	<%
 		session.invalidate();
-		response.sendRedirect("./index.jsp");
+		response.sendRedirect(request.getContextPath()+"/index.jsp");
 
 	%>
 	

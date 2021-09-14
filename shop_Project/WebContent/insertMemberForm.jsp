@@ -23,7 +23,7 @@
 		
 		<h1>회원가입</h1>
 		
-		<form method="post" action="./insertMemberAction.jsp">
+		<form method="post" action="<%=request.getContextPath() %>/insertMemberAction.jsp">
 				<!-- 아이디 -->
 				<div>memberId: </div>
 				<div><input type = "text" name="memberId"></div>

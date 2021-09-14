@@ -16,6 +16,7 @@
 
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 	</head>
 
@@ -23,10 +24,19 @@
 
 		<h1>로그인 화면</h1>
 		
-		<form method="post" action="./loginFormAction.jsp">
+		<form method="post" action="<%=request.getContextPath() %>/loginFormAction.jsp">
+			
+			<div class="form-inline">
+			
+				<label for="email" class="mr-sm-2">Email address:</label>
+	  			<input type="email" class="form-control mb-2 mr-sm-2" placeholder="Enter email" id="email">
+	  			<label for="pwd" class="mr-sm-2">Password:</label>
+	  			<input type="password" class="form-control mb-2 mr-sm-2" placeholder="Enter password" id="pwd">
+			
+			</div>
 		
-			<div>memberId: </div>
-			<div><input type = "text" name="memberId"></div>
+			<label for="text">ID:</label>
+			<div><input type = "text" class="form-control mb-2 mr-sm-2" placeholder="아이디를 입력하세요" name="memberId"></div>
 			<div>memberPw: </div>
 			<div><input type = "password" name="memberPw"></div>
 			<button type= "submit">로그인</button>

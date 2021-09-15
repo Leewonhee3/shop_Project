@@ -78,6 +78,9 @@ public class MemberDao {
 		
 		System.out.println(lastPage+"<----- Dao.CountMemberAll - lastPage");
 		
+		rs.close(); //DB 해제하는거 잊지말자 2021.09.15
+		stmt.close();
+		conn.close();
 		return lastPage;
 		
 	}

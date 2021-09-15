@@ -11,6 +11,32 @@ import vo.Member;
 
 public class MemberDao {
 	
+	//[관리자] rowPerPage를 파라미터로 받고 DB데이터 카운트 후 마지막 페이지 반환
+	
+	public int CountMemberAll(int ROW_PER_PAGE) throws ClassNotFoundException, SQLException {
+		DBUtil dbutil = new DBUtil();
+		Connection conn = dbutil.getConnection();
+		String sql="SELECT COUNT(*) from member";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		System.out.println(stmt+"<-------Dao.CountMemberAll - stmt");
+		ResultSet rs = stmt.executeQuery();
+		int totalRowCount = 0;
+		if(rs.next()) {
+			totalRowCount = rs.getInt("COUNT(*)");
+		}
+		
+		int lastPage = totalRowCount / ROW_PER_PAGE;
+		
+		if(totalRowCount % ROW_PER_PAGE != 0){
+			lastPage++;
+		}
+		
+		System.out.println(lastPage+"<----- Dao.CountMemberAll - lastPage");
+		
+		return lastPage;
+		
+	}
+	
 	//[관리자] 회원목록 출력
 	public ArrayList<Member> SelectMemberListAllByPage(int beginRow, int rowPerPage) throws SQLException, ClassNotFoundException {
 		ArrayList<Member> list = new ArrayList<Member>();

@@ -18,10 +18,12 @@
 	final int ROW_PER_PAGE = 10; // 상수 const
 	
 	int beginRow = (currentPage-1)*ROW_PER_PAGE;
-	int lastPage = 10; //임시로
+	
 	MemberDao memberDao = new MemberDao();
 	ArrayList<Member>memberList = new ArrayList<Member>();
 	memberList = memberDao.SelectMemberListAllByPage(beginRow, ROW_PER_PAGE);
+
+	int lastPage = memberDao.CountMemberAll(ROW_PER_PAGE);
 %>    
 <!DOCTYPE html>
 <html>

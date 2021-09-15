@@ -53,7 +53,7 @@
 					<th>memberGender</th>
 					<th>updateDate</th>
 					<th>createDate</th>
-					<th></th>
+					<th>회원등급</th>
 				</tr>
 				
 			</thead>
@@ -108,6 +108,8 @@
 						<a class="btn btn-warning" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=currentPage+1%>">다음</a>
 				<%		
 					}
+					
+					System.out.println(currentPage+"admin/selectMemberList - currentPage");
 				%>
 				
 				
@@ -115,6 +117,8 @@
 			</tbody>
 			
 		</table>
+		
+		<a class="btn btn-warning" href="<%=request.getContextPath()%>/admin/adminIndex">뒤로</a>
 		
 	</body>
 	

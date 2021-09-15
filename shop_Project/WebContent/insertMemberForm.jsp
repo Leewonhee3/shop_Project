@@ -21,6 +21,14 @@
 
 	<body>
 		
+		<!-- start : submenu include -->
+		<div>
+			
+			<jsp:include page="/partial/submenu.jsp"></jsp:include>
+			
+		</div>
+		<!-- end : submenu include -->
+		
 		<h1>회원가입</h1>
 		
 		<form method="post" action="<%=request.getContextPath() %>/insertMemberAction.jsp">

@@ -21,25 +21,52 @@
 	</head>
 
 	<body>
-
-		<h1>로그인 화면</h1>
+		
+		<!-- start : submenu include -->
+		<div>
+			
+			<jsp:include page="/partial/submenu.jsp"></jsp:include>
+			
+		</div>
+		<!-- end : submenu include -->
 		
 		<form method="post" action="<%=request.getContextPath() %>/loginFormAction.jsp">
 			
-			<div class="form-inline">
-			
-				<label for="email" class="mr-sm-2">Email address:</label>
-	  			<input type="email" class="form-control mb-2 mr-sm-2" placeholder="Enter email" id="email">
-	  			<label for="pwd" class="mr-sm-2">Password:</label>
-	  			<input type="password" class="form-control mb-2 mr-sm-2" placeholder="Enter password" id="pwd">
-			
-			</div>
-		
-			<label for="text">ID:</label>
-			<div><input type = "text" class="form-control mb-2 mr-sm-2" placeholder="아이디를 입력하세요" name="memberId"></div>
-			<div>memberPw: </div>
-			<div><input type = "password" name="memberPw"></div>
-			<button type= "submit">로그인</button>
+			<div class="form-inline" "container row" style="float: none; margin:100 auto;">
+				
+				<div class="col-md-3" style="float: none; margin:0 auto;">
+						
+					<h1>로그인 화면</h1>
+					
+					<div>
+					
+						<div class=”col-sm-3 col-sm-push-9“>
+							
+							ID
+							
+						</div>
+						
+						<input type = "text" class="form-control" placeholder="아이디를 입력하세요" name="memberId">
+					
+					</div>
+					
+					<div>
+					
+						<div class=”col-sm-3 col-sm-push-9“>
+							
+							Password
+							
+						</div>
+					
+						<input type = "password" class="form-control" placeholder="비밀번호를 입력하세요" name="memberPw">
+					
+					</div>
+					
+					<button type= "submit">로그인</button>
+				
+				</div>
+				
+			</div>		
 		
 		</form>
 	

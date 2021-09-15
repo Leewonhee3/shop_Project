@@ -20,8 +20,8 @@ public class MemberDao {
 		System.out.println(member.getMemberGender()+"<------dao.insertMember - memberGender");
 		//파라미터 확인
 		Connection conn = dbutil.getConnection();
-		String sql ="INSERT INTO member(member_id, member_pw, member_level, member_name, member_age, member_gender, update_date, creat_date) VALUES(?,PASSWORD(?),0,?,?,?,NOW(),NOW())";
-		//DB컬럼명 creat_date e 하나 빼먹음
+		String sql ="INSERT INTO member(member_id, member_pw, member_level, member_name, member_age, member_gender, update_date, create_date) VALUES(?,PASSWORD(?),0,?,?,?,NOW(),NOW())";
+		//DB컬럼명 create_date 수정 9.15
 		PreparedStatement stmt = conn.prepareStatement(sql);
 
 		stmt.setString(1,member.getMemberId()); // 아이디

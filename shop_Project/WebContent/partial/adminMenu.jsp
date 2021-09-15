@@ -11,20 +11,26 @@
 %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 
-	<ul>
+	<head>
 	
-		<li><a href="">admin menu1</a></li>
-		<li><a href="">admin menu2</a></li>
-		<li><a href="">admin menu3</a></li>
-		<li><a href="">admin menu4</a></li>
-		<li><a href="">admin menu5</a></li>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		
+	</head>
+
+	<body>
 	
-	</ul>
-</body>
+		<ul>
+		
+			<li><a href="">admin menu1</a></li>
+			<li><a href="">admin menu2</a></li>
+			<li><a href="">admin menu3</a></li>
+			<li><a href="">admin menu4</a></li>
+			<li><a href="">admin menu5</a></li>
+		
+		</ul>
+		
+	</body>
+	
 </html>

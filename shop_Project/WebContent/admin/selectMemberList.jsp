@@ -2,15 +2,25 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "vo.*" import= "dao.*" import = "java.util.*" %>
 <%
-	request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("utf-8"); //encode
+	
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	if(loginMember == null || loginMember.getMemberLevel() < 1) {
 		System.out.println("오류");
   		response.sendRedirect(request.getContextPath()+"/index.jsp");
    		return;
 	
-	} // 세션이 null이거나 레벨이 0인경우 일반 인덱스 페이지로 이동 
+	} // 세션이 null이거나 레벨이 0인경우 일반 인덱스 페이지로 이동 방어코드
 	
+	//검색어
+	String searchMemberId="";
+	
+	if(request.getParameter("searchMemberId") != null){
+		searchMemberId = request.getParameter("searchMemberId");
+	}
+	System.out.println(searchMemberId + "<--------selectMemberList - searchMemberId");
+	
+	//페이지
 	int currentPage= 1; 
 	if(request.getParameter("currentPage") != null){
 		currentPage= Integer.parseInt(request.getParameter("currentPage"));
@@ -19,11 +29,20 @@
 	
 	int beginRow = (currentPage-1)*ROW_PER_PAGE;
 	
+	//회원목록 
+	
 	MemberDao memberDao = new MemberDao();
-	ArrayList<Member>memberList = new ArrayList<Member>();
-	memberList = memberDao.SelectMemberListAllByPage(beginRow, ROW_PER_PAGE);
-
-	int lastPage = memberDao.CountMemberAll(ROW_PER_PAGE);
+	ArrayList<Member>memberList = null;
+	
+	if(searchMemberId.equals("") == true){ //검색내용이 없으면 리스트 출력
+		memberList = memberDao.SelectMemberListAllByPage(beginRow, ROW_PER_PAGE);
+	}else{
+		memberList = memberDao.SelectMemberListAllBySearchMemberId(beginRow, ROW_PER_PAGE, searchMemberId); // 검색어가 있으면 해당하는 리스트 출력
+		
+	}
+	
+	
+	int lastPage = memberDao.CountMemberAll(ROW_PER_PAGE,searchMemberId);
 %>    
 <!DOCTYPE html>
 <html>
@@ -46,6 +65,7 @@
 			<thead>
 				
 				<tr>
+				
 					<th>memberNo</th>
 					<th>memberLevel</th>
 					<th>memberName</th>
@@ -54,6 +74,7 @@
 					<th>updateDate</th>
 					<th>createDate</th>
 					<th>회원등급</th>
+					
 				</tr>
 				
 			</thead>
@@ -92,33 +113,51 @@
 						</tr>
 				<%
 					}	
+				%>		
 				
-					if(currentPage==1){
-				%>		
-						<a class="btn btn-warning" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=currentPage+1%>">다음</a>
-				<%
-					}else if(currentPage==lastPage){
-				%>
-						
-						<a class="btn btn-warning" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=currentPage-1%>">이전</a>
-				<%		
-					}else{
-				%>		
-						<a class="btn btn-warning" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=currentPage-1%>">이전</a>
-						<a class="btn btn-warning" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=currentPage+1%>">다음</a>
-				<%		
-					}
+				<div>
 					
-					System.out.println(currentPage+"admin/selectMemberList - currentPage");
-				%>
-				
-				
+					<!-- 멤버 아이디로 검색 -->
+					<form action="<%=request.getContextPath() %>/admin/selectMemberList.jsp" method="get">
+					
+						memberId : 
+						<input type="text" name="searchMemberId">
+						
+						<button type="submit">검색</button>
+						
+					</form>
+					
+				</div>
 				
 			</tbody>
 			
 		</table>
 		
-		<div><a class="btn btn-warning" href="<%=request.getContextPath()%>/admin/adminIndex">뒤로</a></div>
+		<div>
+			<%
+				if(currentPage==1){
+					//검색후 페이징 하면 안됨
+			%>
+					<a class="btn btn-warning" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=currentPage+1%>&searchMemberId=<%=searchMemberId%>">다음</a>
+			<%
+				}else if(currentPage==lastPage){
+			%>
+					<a class="btn btn-warning" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=currentPage-1%>&searchMemberId=<%=searchMemberId%>">이전</a>
+			<%		
+				}else{
+			%>		
+					<a class="btn btn-warning" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=currentPage-1%>&searchMemberId=<%=searchMemberId%>">이전</a>
+					<a class="btn btn-warning" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=currentPage+1%>&searchMemberId=<%=searchMemberId%>">다음</a>
+			<%		
+				}
+					
+				System.out.println(currentPage+"admin/selectMemberList - currentPage"); // 현재 페이지 확인
+			%>
+		
+		
+			<div><a class="btn btn-warning" href="<%=request.getContextPath()%>/admin/adminIndex.jsp">뒤로가기</a></div>
+		
+		</div>
 		
 	</body>
 	

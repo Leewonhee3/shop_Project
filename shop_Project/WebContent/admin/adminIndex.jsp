@@ -38,7 +38,7 @@
 		<div><a href="<%=request.getContextPath()%>/admin/selectMemberList.jsp">회원목록</a></div>
 		
 		
-		<div><a class="btn btn-warning" href="<%=request.getContextPath()%>/index.jsp">뒤로</a></div>
+		<div><a class="btn btn-warning" href="<%=request.getContextPath()%>/index.jsp">뒤로가기</a></div>
 		
 	</body>
 	

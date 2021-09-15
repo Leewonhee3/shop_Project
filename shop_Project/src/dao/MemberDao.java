@@ -11,14 +11,59 @@ import vo.Member;
 
 public class MemberDao {
 	
-	//[관리자] rowPerPage를 파라미터로 받고 DB데이터 카운트 후 마지막 페이지 반환
+	//[관리자]회원 아이디 검색
 	
-	public int CountMemberAll(int ROW_PER_PAGE) throws ClassNotFoundException, SQLException {
+	public ArrayList<Member> SelectMemberListAllBySearchMemberId(int beginRow, int rowPerPage, String searchMemberId) throws SQLException, ClassNotFoundException {
+		ArrayList<Member> list = new ArrayList<Member>();
 		DBUtil dbutil = new DBUtil();
 		Connection conn = dbutil.getConnection();
-		String sql="SELECT COUNT(*) from member";
+		String sql="SELECT member_no, member_id, member_level, member_name, member_age, member_gender, update_date, create_date FROM member"
+				+" WHERE member_id LIKE ?"
+				+" ORDER BY create_date ASC LIMIT ?,?"; // 첫번째 라인에 제일 빠른 생성 날짜가 나오도록
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		System.out.println(stmt+"<-------Dao.CountMemberAll - stmt");
+		stmt.setString(1, "%"+searchMemberId+"%");
+		stmt.setInt(2, beginRow); // 현재 페이지
+		stmt.setInt(3, rowPerPage); // 표시할 목록 개수
+		System.out.println(stmt+"<----------Dao.SelectMemberListAllBySearchMemberId - stmt");
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			Member member = new Member();
+			member.setMemberNo(rs.getInt("member_No")); //넘버 int
+			member.setMemberId(rs.getString("member_Id")); //아이디 String
+			member.setMemberName(rs.getString("member_Name")); // 이름 String
+			member.setMemberLevel(rs.getInt("member_Level")); // 레벨 int
+			member.setMemberAge(rs.getInt("member_age")); // 나이 int
+			member.setMemberGender(rs.getString("member_gender")); // 성별 String
+			member.setUpdateDate(rs.getString("update_date")); // 업데이트 날짜 String
+			member.setCreateDate(rs.getString("create_date")); // 생성 날짜 String
+			list.add(member);
+			
+		}
+		System.out.println(list.size()+"Dao.SelectMemberListAllBySearchMemberId - retrun list size check"); //입력 확인
+		rs.close();
+		stmt.close();
+		conn.close();
+		//SELECT member_no, member_id, member_level, member_name, member_age, member_gender, update_date, create_date FROM member
+		//ORDER BY create_date DESC LIMIT ?,?
+
+		return list; // 정상이면 리스트 반환 문제있으면 null 반환
+	}
+	
+	//[관리자] rowPerPage를 파라미터로 받고 DB데이터 카운트 후 마지막 페이지 반환
+	
+	public int CountMemberAll(int ROW_PER_PAGE, String searchMemberId) throws ClassNotFoundException, SQLException {
+		DBUtil dbutil = new DBUtil();
+		Connection conn = dbutil.getConnection();
+		String sql;
+		if(searchMemberId.equals("") == true) { //공백인경우 전체 값 검색어 있을경우 검색결과 값
+			sql = "SELECT COUNT(*) from member";
+		} else {
+			sql = "SELECT COUNT(*) from member WHERE member_id LIKE "+"%"+searchMemberId+"%";
+		}
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		System.out.println(stmt+"<-------Dao.CountMemberAll - stmt");//디버깅
 		ResultSet rs = stmt.executeQuery();
 		int totalRowCount = 0;
 		if(rs.next()) {

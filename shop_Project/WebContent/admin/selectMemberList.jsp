@@ -118,7 +118,7 @@
 			
 		</table>
 		
-		<a class="btn btn-warning" href="<%=request.getContextPath()%>/admin/adminIndex">뒤로</a>
+		<div><a class="btn btn-warning" href="<%=request.getContextPath()%>/admin/adminIndex">뒤로</a></div>
 		
 	</body>
 	

@@ -42,7 +42,7 @@
 	}
 	
 	
-	int lastPage = memberDao.CountMemberAll(ROW_PER_PAGE,searchMemberId);
+	int lastPage = memberDao.CountMemberAll(ROW_PER_PAGE, searchMemberId);
 %>    
 <!DOCTYPE html>
 <html>

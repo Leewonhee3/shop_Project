@@ -168,7 +168,7 @@ public class MemberDao {
 		if(searchMemberId.equals("") == true) { //공백인경우 전체 값 검색어 있을경우 검색결과 값
 			sql = "SELECT COUNT(*) from member";
 		} else {
-			sql = "SELECT COUNT(*) from member WHERE member_id LIKE "+"%"+searchMemberId+"%";
+			sql = "SELECT COUNT(*) from member WHERE member_id LIKE "+"'%"+searchMemberId+"%'";
 		}
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -209,10 +209,10 @@ public class MemberDao {
 		
 		while(rs.next()) {
 			Member member = new Member();
-			member.setMemberNo(rs.getInt("member_No")); //넘버 int
-			member.setMemberId(rs.getString("member_Id")); //아이디 String
-			member.setMemberName(rs.getString("member_Name")); // 이름 String
-			member.setMemberLevel(rs.getInt("member_Level")); // 레벨 int
+			member.setMemberNo(rs.getInt("member_no")); //넘버 int
+			member.setMemberId(rs.getString("member_id")); //아이디 String
+			member.setMemberName(rs.getString("member_name")); // 이름 String
+			member.setMemberLevel(rs.getInt("member_level")); // 레벨 int
 			member.setMemberAge(rs.getInt("member_age")); // 나이 int
 			member.setMemberGender(rs.getString("member_gender")); // 성별 String
 			member.setUpdateDate(rs.getString("update_date")); // 업데이트 날짜 String

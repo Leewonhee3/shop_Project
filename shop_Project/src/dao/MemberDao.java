@@ -11,6 +11,39 @@ import vo.Member;
 
 public class MemberDao {
 	
+	
+	public Member selectMemberOne(Member member) throws ClassNotFoundException, SQLException{
+		DBUtil dbutil = new DBUtil();
+		Connection conn = dbutil.getConnection();
+		Member returnMember = null;
+		String sql="SELECT member_no, member_id, member_level, member_name, member_age, member_gender, update_date, create_date FROM member WHERE member_no=? ";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1,member.getMemberNo());
+		System.out.println(stmt+"<------ selectMemberOne - stmt");
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			returnMember = new Member();
+			returnMember.setMemberNo(rs.getInt("member_no")); //넘버 int
+			returnMember.setMemberId(rs.getString("member_id")); //아이디 String
+			returnMember.setMemberName(rs.getString("member_name")); // 이름 String
+			returnMember.setMemberLevel(rs.getInt("member_level")); // 레벨 int
+			System.out.println("select ok");
+			rs.close();
+			stmt.close();
+			conn.close();
+			
+			return returnMember; // 로그인 성공시 아이디 이름 레벨 반환 실패시 null
+		}
+		
+		rs.close();
+		stmt.close();
+		conn.close();
+		
+		return returnMember;
+	}
+	
+	
+	
 	//[관리자]회원 등급수정 - MemberNo와 수정될 Level를 받아서 update
 	public void updateMemberLevelByAdmin(Member member) throws ClassNotFoundException, SQLException {
 		DBUtil dbutil = new DBUtil();

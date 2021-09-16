@@ -11,6 +11,83 @@ import vo.Member;
 
 public class MemberDao {
 	
+	//[관리자]회원 등급수정 - MemberNo와 수정될 Level를 받아서 update
+	public void updateMemberLevelByAdmin(Member member) throws ClassNotFoundException, SQLException {
+		DBUtil dbutil = new DBUtil();
+		Connection conn = dbutil.getConnection();
+		String sql="UPDATE member SET member_level=? WHERE member_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1,member.getMemberLevel());
+		stmt.setInt(2,member.getMemberNo());
+	
+		System.out.println(stmt+"<------dao.updateMemberLevelByAdmin - stmt"); //쿼리 및 파라미터 확인
+		int check = stmt.executeUpdate(); // 확인용
+		
+		if(check == 1) {
+			System.out.println("성공");
+		}else {
+			System.out.println("실패");
+		}
+		
+		stmt.close();
+		conn.close();
+		
+		return;
+	
+	
+	}
+	
+	//[관리자]회원 비밀번호 수정 - MemberNo와 수정될 Pw를 받아서 update
+	public void updateMemberPwByAdmin(Member member) throws ClassNotFoundException, SQLException {
+		DBUtil dbutil = new DBUtil();
+		Connection conn = dbutil.getConnection();
+		String sql="UPDATE member SET member_pw=PASSWORD(?) WHERE member_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1,member.getMemberPw());
+		stmt.setInt(2,member.getMemberNo());
+	
+		System.out.println(stmt+"<------dao.updateMemberPwByAdmin - stmt"); //쿼리 및 파라미터 확인
+		int check = stmt.executeUpdate(); // 확인용
+		
+		if(check == 1) {
+			System.out.println("성공");
+		}else {
+			System.out.println("실패");
+		}
+		
+		stmt.close();
+		conn.close();
+		
+		return;
+	}
+	
+	
+	//[관리자]회원 강제탈퇴 - MemberNo를 받아서 delete
+	public void deleteMemberByAdmin(int memberNo) throws ClassNotFoundException, SQLException {
+		
+		DBUtil dbutil = new DBUtil();
+		Connection conn = dbutil.getConnection();
+		String sql="DELETE FROM member WHERE member_no = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1,memberNo);
+		System.out.println(stmt+"<------dao.updateMemberPwByAdmin - stmt"); //쿼리 및 파라미터 확인
+		int check = stmt.executeUpdate(); // 확인용
+		
+		if(check == 1) {
+			System.out.println("성공");
+		}else {
+			System.out.println("실패");
+		}
+		
+		stmt.close();
+		conn.close();
+		
+		return;
+		
+	}
+	
+	
+	
 	//[관리자]회원 아이디 검색
 	
 	public ArrayList<Member> SelectMemberListAllBySearchMemberId(int beginRow, int rowPerPage, String searchMemberId) throws SQLException, ClassNotFoundException {
@@ -26,7 +103,6 @@ public class MemberDao {
 		stmt.setInt(3, rowPerPage); // 표시할 목록 개수
 		System.out.println(stmt+"<----------Dao.SelectMemberListAllBySearchMemberId - stmt");
 		ResultSet rs = stmt.executeQuery();
-		
 		while(rs.next()) {
 			Member member = new Member();
 			member.setMemberNo(rs.getInt("member_No")); //넘버 int
@@ -179,7 +255,7 @@ public class MemberDao {
 		System.out.println(member.getMemberPw()+"<--- dao.login  - memberPw");
 		//파라미터 확인
 		Connection conn = dbUtil.getConnection();
-		String sql ="SELECT member_no memberNo, member_id memberId,member_name memberName, member_level memberLevel FROM member WHERE member_id=? AND member_pw=PASSWORD(?);";
+		String sql ="SELECT member_no memberNo, member_id memberId,member_name memberName, member_level memberLevel FROM member WHERE member_id=? AND member_pw=password(?);";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, member.getMemberId()); //아이디
 		stmt.setString(2, member.getMemberPw()); //패스워드
@@ -187,6 +263,9 @@ public class MemberDao {
 		System.out.println(stmt+"<--- dao.login - stmt"); //쿼리 및 파라미터 확인
 
 		ResultSet rs = stmt.executeQuery();
+		System.out.println(rs+"<-------- dao.login - rs");
+		//System.out.println(rs.next()+"<-------- dao.login - rs.next"); //이거 함부로 하면 안뎌
+		//System.out.println(rs.getFetchSize());
 		if(rs.next()) {
 			returnMember = new Member();
 			returnMember.setMemberNo(rs.getInt("memberNo")); //넘버 int

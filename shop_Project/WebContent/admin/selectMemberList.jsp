@@ -73,7 +73,9 @@
 					<th>memberGender</th>
 					<th>updateDate</th>
 					<th>createDate</th>
-					<th>회원등급</th>
+					<th>등급수정</th>
+					<th>비밀번호수정</th>
+					<th>강제탈퇴</th>
 					
 				</tr>
 				
@@ -95,6 +97,24 @@
 							<td><%=m.getMemberGender() %></td>
 							<td><%=m.getUpdateDate() %></td>
 							<td><%=m.getCreateDate() %></td>
+							
+							<td>
+								<!-- 특정 회원의 등급을 수정 -->
+								<a href="<%=request.getContextPath()%>/admin/updateMemberLevelForm.jsp?memberNo=<%=m.getMemberNo()%>">등급수정</a>
+							
+							</td>
+							
+							<td>
+								<!-- 특정회원의 비밀번호를 수정 -->
+								<a href="<%=request.getContextPath()%>/admin/updateMemberPwForm.jsp?memberNo=<%=m.getMemberNo()%>">비밀번호수정</a>
+							
+							</td>
+						
+							<td>
+								<!-- 특정 회원을 강제 탈퇴 -->
+								<a href="./deleteMemberForm.jsp?memberNo=<%=m.getMemberNo()%>">강제탈퇴</a>
+							
+							</td>
 							
 							<td>
 								<%

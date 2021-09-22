@@ -11,7 +11,32 @@ import vo.Member;
 
 public class MemberDao {
 	
+	//[회원] 회원가입시 아이디 중복검사 메소드
+	public String selectMemberId(String memberIdCheck) throws ClassNotFoundException, SQLException{
+		String memberId = null;
+		DBUtil dbutil = new DBUtil();
+		Connection conn = dbutil.getConnection();
+		String sql="SELECT member_id memberId FROM member WHERE member_id=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1,memberIdCheck);
+		System.out.println(stmt+"<-------- dao.selectMemberId - stmt");
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()){
+			memberId= rs.getString("memberId");
+		}
+		
+		rs.close();
+		stmt.close();
+		conn.close();
 	
+		return memberId; // null -> 사용가능한ID, 아니면 이미 사용중인 ID
+	}
+	
+	
+	
+	
+	
+	//회원 정보를 반환하는 메소드
 	public Member selectMemberOne(Member member) throws ClassNotFoundException, SQLException{
 		DBUtil dbutil = new DBUtil();
 		Connection conn = dbutil.getConnection();
@@ -19,7 +44,7 @@ public class MemberDao {
 		String sql="SELECT member_no, member_id, member_level, member_name, member_age, member_gender, update_date, create_date FROM member WHERE member_no=? ";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1,member.getMemberNo());
-		System.out.println(stmt+"<------ selectMemberOne - stmt");
+		System.out.println(stmt+"<------ dao.selectMemberOne - stmt");
 		ResultSet rs = stmt.executeQuery();
 		if(rs.next()) {
 			returnMember = new Member();
@@ -136,7 +161,7 @@ public class MemberDao {
 		stmt.setInt(3, rowPerPage); // 표시할 목록 개수
 		System.out.println(stmt+"<----------Dao.SelectMemberListAllBySearchMemberId - stmt");
 		ResultSet rs = stmt.executeQuery();
-		while(rs.next()) {
+		while(rs.next()) { //쿼리 첫줄을 실행하고 bool값을 리턴하는 함수 여러번 실행하면 문제 생김. 디버깅 코드가 필요할시 rs자체를 출력하거나 while or if문 안에서 체크하는 코드 필요함
 			Member member = new Member();
 			member.setMemberNo(rs.getInt("member_No")); //넘버 int
 			member.setMemberId(rs.getString("member_Id")); //아이디 String

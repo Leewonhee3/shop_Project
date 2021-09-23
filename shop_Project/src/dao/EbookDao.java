@@ -9,6 +9,42 @@ import vo.*;
 
 public class EbookDao {
 	
+	
+	//[관리자]책 이미지 수정
+	public void updateEbookImg(Ebook ebook) throws ClassNotFoundException, SQLException {
+		DBUtil dbutil = new DBUtil();
+		Connection conn = dbutil.getConnection();
+		String sql="UPDATE ebook SET ebook_img=? WHERE ebook_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, ebook.getEbookImg());
+		stmt.setInt(2, ebook.getEbookNo());
+		stmt.executeUpdate();
+		stmt.close();
+		conn.close();
+		
+	}
+	
+	
+	
+	public Ebook selectEbookOne(int ebookNo) throws ClassNotFoundException, SQLException {
+		Ebook ebook = null;
+		DBUtil dbutil = new DBUtil();
+		Connection conn = dbutil.getConnection();
+		String sql="SELECT ebook_no, ebook_img FROM ebook WHERE ebook_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, ebookNo);
+		System.out.println(); //디버깅 stmt
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			ebook = new Ebook();
+			ebook.setEbookNo(rs.getInt("ebook_no"));
+			ebook.setEbookImg(rs.getString("ebook_img"));
+		}
+		return  ebook;
+		
+	}
+	
+	
 	//[관리자] ebook 전체 조회
 	public ArrayList<Ebook> selectEbookList(int beginRow, int ROW_PER_PAGE) throws ClassNotFoundException, SQLException{
 		ArrayList<Ebook> list = new ArrayList<Ebook>();
@@ -112,5 +148,6 @@ public class EbookDao {
 		return lastPage;
 		
 	}
+	
 }
 

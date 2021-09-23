@@ -94,7 +94,7 @@
 					      
 					<tr>
 					      
-						<td><br><a href="<%=request.getContextPath()%>/admin/">전자책 관리</a></td>
+						<td><br><a href="<%=request.getContextPath()%>/admin/selectEbookList.jsp">전자책 관리</a></td>
 						<td>전자책을 관리하는 기능입니다.</td>
 					        
 					</tr>

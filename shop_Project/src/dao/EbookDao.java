@@ -23,7 +23,7 @@ public class EbookDao {
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, beginRow); // 현재 페이지
 		stmt.setInt(2, ROW_PER_PAGE); // 표시할 목록 개수
-		System.out.println(stmt+"<------ dao.selectEbookList - stmt");
+		System.out.println(stmt+"<------ dao.selectEbookList - stmt"); //쿼리 및 파라메터 확인 
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
 			ebook = new Ebook();
@@ -60,7 +60,7 @@ public class EbookDao {
 		stmt.setString(1, categoryName);
 		stmt.setInt(2, beginRow); // 현재 페이지
 		stmt.setInt(3, ROW_PER_PAGE); // 표시할 목록 개수
-		System.out.println(stmt+"<------ dao.selectEbookListByCategory - stmt");
+		System.out.println(stmt+"<------ dao.selectEbookListByCategory - stmt"); //쿼리 및 파라메터 확인
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
 			ebook = new Ebook();
@@ -91,7 +91,7 @@ public class EbookDao {
 		}
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		System.out.println(stmt+"<-------Dao.CountEbookAll - stmt");//디버깅
+		System.out.println(stmt+"<-------Dao.CountEbookAll - stmt"); //쿼리 확인
 		ResultSet rs = stmt.executeQuery();
 		int totalRowCount = 0;
 		if(rs.next()) {

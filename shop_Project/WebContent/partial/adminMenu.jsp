@@ -55,7 +55,7 @@
 		    	
 		    	<li class="nav-item">
 		      	
-		      		<a class="nav-link" href="<%=request.getContextPath()%>/admin/">[전자책 관리]</a>
+		      		<a class="nav-link" href="<%=request.getContextPath()%>/admin/selectEbookList.jsp">[전자책 관리]</a>
 		    	
 		    	</li>
 		    	

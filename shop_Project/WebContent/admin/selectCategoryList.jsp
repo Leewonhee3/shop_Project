@@ -116,6 +116,12 @@
 			</tbody>
 			
 		</table>
+		
+		<div>
+		
+			<a href="<%=request.getContextPath()%>/admin/adminIndex.jsp">관리자페이지 가기</a>
+		
+		</div>	
 			
 	</body>
 

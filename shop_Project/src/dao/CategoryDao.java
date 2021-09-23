@@ -88,6 +88,27 @@ public class CategoryDao {
 		}
 		
 	}
+	
+	//[관리자] 카테고리 추가시 이름 중복검사 - 카테고리명을 파라메터로 받아 select 한 후 카테고리명 반환
+		public String selectCategoryName(String categoryNameCheck) throws ClassNotFoundException, SQLException{
+			String categoryName = null;
+			DBUtil dbutil = new DBUtil();
+			Connection conn = dbutil.getConnection();
+			String sql="SELECT category_name FROM category WHERE category_name=?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1,categoryNameCheck);
+			System.out.println(stmt+"<-------- dao.selectCategoryName - stmt");
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()){
+				categoryName = rs.getString("category_name");
+			}
+			
+			rs.close();
+			stmt.close();
+			conn.close();
+		
+			return categoryName; // null -> 사용가능한ID, 아니면 이미 사용중인 ID
+		}
 		
 }
 

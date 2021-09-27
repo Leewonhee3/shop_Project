@@ -20,6 +20,7 @@
 
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 	</head>
 
@@ -91,13 +92,13 @@
 				      		
 				    <div class="btn-group btn-group-sm">	
 				      		
-						<a href="#" class="btn btn-primary">프로필 수정</a>
+						<a href="#" class="btn btn-primary">회원 정보</a>
 				    			
 			    	</div>
-			    			
-			    	<div class="btn-group btn-group-sm">	
+			   		
+			   		<div class="btn-group btn-group-sm">	
 				      		
-			    		<a href="#" class="btn btn-primary">회원 정보</a>
+			    		<a href="<%=request.getContextPath() %>/selectOrderListByMember.jsp" class="btn btn-primary">주문 정보</a>
 			    			
 			    	</div>
 			    			
@@ -128,11 +129,82 @@
 	%>
 	<!-- product list print -->
 	<%
-		//list
+		//all list
 		EbookDao ebookDao = new EbookDao();
 		ArrayList<Ebook> ebookList = ebookDao.selectEbookList(beginRow, ROW_PER_PAGE);
-	
+		
+		// populer 5 list
+		ArrayList<Ebook> popularEbookList = ebookDao.selectPopularEbookList(beginRow, 5);
+		
+		// most recent 5 list
+		ArrayList<Ebook> newEbookList = ebookDao.selectNewEbookList(beginRow, 5);
+		
 	%>
+		<h2>신간 상품 목록</h2>
+		
+		<table border="1">
+			
+			<%
+				
+				for(Ebook e : newEbookList){
+			
+			%>
+			
+			<td>
+				
+				<div>
+					
+					<div><a href=""><img src ="<%=request.getContextPath() %>/img/<%=e.getEbookImg() %>" width="200" height="200"></a></div>
+					
+				</div>
+				
+				<div><a href=""><%=e.getEbookTitle() %></a></div>
+				<div><%=e.getEbookPrice() %></div>
+				
+			</td>
+			
+			<%
+			
+				}
+			
+			%>
+		
+		</table>
+	
+		<h2>인기 상품 목록</h2>
+		
+		<table border="1">
+			
+			<%
+				
+				for(Ebook e : popularEbookList){
+			
+			%>
+			
+			<td>
+				
+				<div>
+					
+					<div><a href=""><img src ="<%=request.getContextPath() %>/img/<%=e.getEbookImg() %>" width="200" height="200"></a></div>
+					
+				</div>
+				
+				<div><a href=""><%=e.getEbookTitle() %></a></div>
+				<div><%=e.getEbookPrice() %></div>
+				
+			</td>
+			
+			<%
+			
+				}
+			
+			%>
+		
+		</table>
+	
+	
+	
+		<h2>전체 상품 목록</h2>
 	
 		<table border="1">
 			
@@ -145,8 +217,8 @@
 					
 					<td>
 							
-						<div><img src ="<%=request.getContextPath() %>/img/<%=e.getEbookImg() %>" width="200" height="200"></div>
-						<div><%=e.getEbookTitle() %></div>
+						<div><a href=""><img src ="<%=request.getContextPath() %>/img/<%=e.getEbookImg() %>" width="200" height="200"></a></div>
+						<div><a href=""><%=e.getEbookTitle() %></a></div>
 						<div>₩<%=e.getEbookPrice() %></div>
 						
 					</td>

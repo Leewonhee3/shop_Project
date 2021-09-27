@@ -3,7 +3,7 @@
 <%@ page import = "dao.*" import="vo.*" %>    
 <%
 	
-request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("utf-8");
 	
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	if(loginMember == null || loginMember.getMemberLevel() < 1) {

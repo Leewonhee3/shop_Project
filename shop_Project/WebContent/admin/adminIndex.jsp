@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "vo.*" %>
 <%
+	request.setCharacterEncoding("utf-8");
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	if(loginMember == null || loginMember.getMemberLevel() < 1) {
 		System.out.println("오류");
@@ -101,7 +102,7 @@
 					
 					<tr>
 					      
-						<td><br><a href="<%=request.getContextPath()%>/admin/">주문 관리</a></td>
+						<td><br><a href="<%=request.getContextPath()%>/admin/selectOrderList.jsp">주문 관리</a></td>
 						<td>회원 주문을 관리하는 기능입니다.</td>
 					        
 					</tr>
@@ -115,14 +116,14 @@
 					
 					<tr>
 					      
-						<td><br><a href="<%=request.getContextPath()%>/admin/">공지게시판 관리</a></td>
+						<td><br><a href="<%=request.getContextPath()%>/admin/selectNoticeBoardList.jsp">공지게시판 관리</a></td>
 						<td>공지게시판을 관리하는 기능입니다.</td>
 					        
 					</tr>
 					
 					<tr>
 					      
-						<td><br><a href="<%=request.getContextPath()%>/admin/">QnA게시판 관리</a></td>
+						<td><br><a href="<%=request.getContextPath()%>/admin/selectQnABoardList.jsp">QnA게시판 관리</a></td>
 						<td>QnA게시판을 관리하는 기능입니다.</td>
 					        
 					</tr>

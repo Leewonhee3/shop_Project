@@ -61,7 +61,7 @@
 		    	
 		    	<li class="nav-item">
 		      	
-		      		<a class="nav-link" href="<%=request.getContextPath()%>/admin/">[주문 관리]</a>
+		      		<a class="nav-link" href="<%=request.getContextPath()%>/admin/selectOrderList.jsp">[주문 관리]</a>
 		    	
 		    	</li>
 		    	
@@ -73,13 +73,13 @@
 		    	
 		    	<li class="nav-item">
 		      	
-		      		<a class="nav-link" href="<%=request.getContextPath()%>/admin/">[공지게시판 관리]</a>
+		      		<a class="nav-link" href="<%=request.getContextPath()%>/admin/selectNoticeBoardList.jsp">[공지게시판 관리]</a>
 		    	
 		    	</li>
 		    	
 		    	<li class="nav-item">
 		      	
-		      		<a class="nav-link" href="<%=request.getContextPath()%>/admin/">[QnA게시판 관리]</a>
+		      		<a class="nav-link" href="<%=request.getContextPath()%>/admin/selectQnABoardList.jsp">[QnA게시판 관리]</a>
 		    	
 		    	</li>
 		    	

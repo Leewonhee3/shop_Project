@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="vo.*" import="dao.*" %>
+<%@ page import="vo.*" import="dao.*" import="java.util.*" %>
+<%
+
+	//페이지
+	int currentPage= 1; 
+	if(request.getParameter("currentPage") != null){
+		currentPage= Integer.parseInt(request.getParameter("currentPage"));
+	}
+	final int ROW_PER_PAGE = 10; // 상수 const
+		
+	int beginRow = (currentPage-1)*ROW_PER_PAGE;
+	
+%>    
 <!DOCTYPE html>
 <html>
 
@@ -114,6 +126,52 @@
 	<%
         }
 	%>
+	<!-- product list print -->
+	<%
+		//list
+		EbookDao ebookDao = new EbookDao();
+		ArrayList<Ebook> ebookList = ebookDao.selectEbookList(beginRow, ROW_PER_PAGE);
+	
+	%>
+	
+		<table border="1">
+			
+			<tr>
+			
+			<%
+				int i = 0;
+				for(Ebook e : ebookList){
+			%>
+					
+					<td>
+							
+						<div><img src ="<%=request.getContextPath() %>/img/<%=e.getEbookImg() %>" width="200" height="200"></div>
+						<div><%=e.getEbookTitle() %></div>
+						<div>₩<%=e.getEbookPrice() %></div>
+						
+					</td>
+						
+			<% 			
+			
+					i += 1;
+					if(i%5 == 0){
+			%>
+						
+						</tr><tr><!-- next line -->
+						
+			<% 			
+					}
+				}
+			%>
+			
+			</tr>
+		
+		</table>
+		
+		<a href="<%=request.getContextPath()%>/index.jsp?currentPage=<%=currentPage-1%>">이전</a>
+		<a href="<%=request.getContextPath()%>/index.jsp?currentPage=<%=currentPage+1%>">다음</a>
+	
+	
 	</body>
 
 </html>

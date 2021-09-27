@@ -40,6 +40,16 @@
 
 	<body>
 		
+		<!-- 관리자 메뉴 include -->
+		
+		<!-- start : submenu include -->
+		<div>
+				
+			<jsp:include page="/partial/adminMenu.jsp"></jsp:include>
+				
+		</div>
+		<!-- end : submenu include -->		
+		
 		<h1>전자책 카테고리 관리</h1>
 		
 		<div>

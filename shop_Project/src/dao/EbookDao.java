@@ -10,7 +10,7 @@ import vo.*;
 public class EbookDao {
 	
 	
-	//[°ü¸®ÀÚ]Ã¥ ÀÌ¹ÌÁö ¼öÁ¤
+	//[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½]Ã¥ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void updateEbookImg(Ebook ebook) throws ClassNotFoundException, SQLException {
 		DBUtil dbutil = new DBUtil();
 		Connection conn = dbutil.getConnection();
@@ -24,8 +24,6 @@ public class EbookDao {
 		
 	}
 	
-	
-	
 	public Ebook selectEbookOne(int ebookNo) throws ClassNotFoundException, SQLException {
 		Ebook ebook = null;
 		DBUtil dbutil = new DBUtil();
@@ -33,7 +31,7 @@ public class EbookDao {
 		String sql="SELECT ebook_no, ebook_img FROM ebook WHERE ebook_no=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, ebookNo);
-		System.out.println(); //µð¹ö±ë stmt
+		System.out.println(); //ï¿½ï¿½ï¿½ï¿½ï¿½ stmt
 		ResultSet rs = stmt.executeQuery();
 		if(rs.next()) {
 			ebook = new Ebook();
@@ -45,7 +43,7 @@ public class EbookDao {
 	}
 	
 	
-	//[°ü¸®ÀÚ] ebook ÀüÃ¼ Á¶È¸
+	//[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½] ebook ï¿½ï¿½Ã¼ ï¿½ï¿½È¸
 	public ArrayList<Ebook> selectEbookList(int beginRow, int ROW_PER_PAGE) throws ClassNotFoundException, SQLException{
 		ArrayList<Ebook> list = new ArrayList<Ebook>();
 		/*
@@ -54,32 +52,34 @@ public class EbookDao {
 		DBUtil dbutil = new DBUtil();
 		Connection conn = dbutil.getConnection();
 		Ebook ebook = null;
-		String sql="SELECT ebook_no, category_name, ebook_title, ebook_state FROM ebook"
-				+" ORDER BY ebook_createdate ASC LIMIT ?,?"; // Ã¹¹øÂ° ¶óÀÎ¿¡ Á¦ÀÏ ºü¸¥ »ý¼º ³¯Â¥°¡ ³ª¿Àµµ·Ï
+		String sql="SELECT ebook_no, category_name, ebook_title, ebook_state, ebook_img, ebook_price FROM ebook"
+				+" ORDER BY create_date ASC LIMIT ?,?"; // Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, beginRow); // ÇöÀç ÆäÀÌÁö
-		stmt.setInt(2, ROW_PER_PAGE); // Ç¥½ÃÇÒ ¸ñ·Ï °³¼ö
-		System.out.println(stmt+"<------ dao.selectEbookList - stmt"); //Äõ¸® ¹× ÆÄ¶ó¸ÞÅÍ È®ÀÎ 
+		stmt.setInt(1, beginRow); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		stmt.setInt(2, ROW_PER_PAGE); // Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		System.out.println(stmt+"<------ dao.selectEbookList - stmt"); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ 
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
 			ebook = new Ebook();
-			ebook.setEbookNo(rs.getInt("ebook_no")); //¹øÈ£ int
-			ebook.setCategoryName(rs.getString("category_name")); //Ä«Å×°í¸®¸í String
-			ebook.setEbookTitle(rs.getString("ebook_title")); // ÀÌ¸§ String
-			ebook.setEbookState(rs.getString("ebook_state")); // ÆÇ¸Å»óÅÂ String
+			ebook.setEbookNo(rs.getInt("ebook_no")); //ï¿½ï¿½È£ int
+			ebook.setCategoryName(rs.getString("category_name")); //Ä«ï¿½×°ï¿½ï¿½ï¿½ String
+			ebook.setEbookTitle(rs.getString("ebook_title")); // ï¿½Ì¸ï¿½ String
+			ebook.setEbookState(rs.getString("ebook_state")); // ï¿½Ç¸Å»ï¿½ï¿½ï¿½ String
+			ebook.setEbookImg(rs.getString("ebook_img"));
+			ebook.setEbookPrice(rs.getInt("ebook_price"));
 			list.add(ebook);
 			
 		}
 		
 		System.out.println("select ok from ebook");
-		rs.close(); //DB ÇØÁ¦ÇÏ´Â°Å ÀØÁö¸»ÀÚ 
+		rs.close(); //DB ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 		stmt.close();
 		conn.close();
 			
 		return list;
 		
 	}
-	//[°ü¸®ÀÚ] ebook Ä«Å×°í¸®º° Á¶È¸
+	//[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½] ebook Ä«ï¿½×°ï¿½ï¿½ï¿½ ï¿½ï¿½È¸  [admin/guest] ebook list print
 	public ArrayList<Ebook> selectEbookListByCategory(int beginRow, int ROW_PER_PAGE, String categoryName) throws ClassNotFoundException, SQLException{
 		ArrayList<Ebook> list = new ArrayList<Ebook>();
 		
@@ -90,44 +90,46 @@ public class EbookDao {
 		DBUtil dbutil = new DBUtil();
 		Connection conn = dbutil.getConnection();
 		Ebook ebook = null;
-		String sql="SELECT ebook_no, category_name, ebook_title, ebook_state FROM ebook WHERE category_name=?"
-				+" ORDER BY ebook_createdate ASC LIMIT ?,?"; // Ã¹¹øÂ° ¶óÀÎ¿¡ Á¦ÀÏ ºü¸¥ »ý¼º ³¯Â¥°¡ ³ª¿Àµµ·Ï
+		String sql="SELECT ebook_no, category_name, ebook_title, ebook_state, ebook_img, ebook_price FROM ebook WHERE category_name=?"
+				+" ORDER BY create_date ASC LIMIT ?,?"; // Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, categoryName);
-		stmt.setInt(2, beginRow); // ÇöÀç ÆäÀÌÁö
-		stmt.setInt(3, ROW_PER_PAGE); // Ç¥½ÃÇÒ ¸ñ·Ï °³¼ö
-		System.out.println(stmt+"<------ dao.selectEbookListByCategory - stmt"); //Äõ¸® ¹× ÆÄ¶ó¸ÞÅÍ È®ÀÎ
+		stmt.setInt(2, beginRow); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		stmt.setInt(3, ROW_PER_PAGE); // Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		System.out.println(stmt+"<------ dao.selectEbookListByCategory - stmt"); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
 			ebook = new Ebook();
-			ebook.setEbookNo(rs.getInt("ebook_no")); //¹øÈ£ int
-			ebook.setCategoryName(rs.getString("category_name")); //Ä«Å×°í¸®¸í String
-			ebook.setEbookTitle(rs.getString("ebook_title")); // ÀÌ¸§ String
-			ebook.setEbookState(rs.getString("ebook_state")); // ÆÇ¸Å»óÅÂ String
+			ebook.setEbookNo(rs.getInt("ebook_no")); //ï¿½ï¿½È£ int
+			ebook.setCategoryName(rs.getString("category_name")); //Ä«ï¿½×°ï¿½ï¿½ï¿½ String
+			ebook.setEbookTitle(rs.getString("ebook_title")); // ï¿½Ì¸ï¿½ String
+			ebook.setEbookState(rs.getString("ebook_state")); // ï¿½Ç¸Å»ï¿½ï¿½ï¿½ String
+			ebook.setEbookImg(rs.getString("ebook_img"));
+			ebook.setEbookPrice(rs.getInt("ebook_price"));
 			list.add(ebook);
 			
 		}
 		
 		System.out.println("select ok from ebook");
-		rs.close(); //DB ÇØÁ¦ÇÏ´Â°Å ÀØÁö¸»ÀÚ 
+		rs.close(); //DB ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 		stmt.close();
 		conn.close();
 			
 		return list;
 	}
-	//[°ü¸®ÀÚ] ebook ÀüÃ¼ Ä«¿îÆ®, Ä«Å×°í¸® Ä«¿îÆ®
+	//[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½] ebook ï¿½ï¿½Ã¼ Ä«ï¿½ï¿½Æ®, Ä«ï¿½×°ï¿½ Ä«ï¿½ï¿½Æ®
 	public int CountEbookAll(int ROW_PER_PAGE, String categoryName) throws ClassNotFoundException, SQLException {
 		DBUtil dbutil = new DBUtil();
 		Connection conn = dbutil.getConnection();
 		String sql;
-		if(categoryName.equals("") == true) { //°ø¹éÀÎ°æ¿ì ÀüÃ¼ °ª °Ë»ö¾î ÀÖÀ»°æ¿ì °Ë»ö°á°ú °ª
+		if(categoryName.equals("") == true) { //ï¿½ï¿½ï¿½ï¿½ï¿½Î°ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 			sql = "SELECT COUNT(*) from Ebook";
 		} else {
 			sql = "SELECT COUNT(*) from Ebook WHERE category_name LIKE "+"'%"+categoryName+"%'";
 		}
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		System.out.println(stmt+"<-------Dao.CountEbookAll - stmt"); //Äõ¸® È®ÀÎ
+		System.out.println(stmt+"<-------Dao.CountEbookAll - stmt"); //ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 		ResultSet rs = stmt.executeQuery();
 		int totalRowCount = 0;
 		if(rs.next()) {
@@ -142,7 +144,7 @@ public class EbookDao {
 		
 		System.out.println(lastPage+"<----- Dao.CountEbookAll - lastPage");
 		
-		rs.close(); //DB ÇØÁ¦ÇÏ´Â°Å ÀØÁö¸»ÀÚ 
+		rs.close(); //DB ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 		stmt.close();
 		conn.close();
 		return lastPage;

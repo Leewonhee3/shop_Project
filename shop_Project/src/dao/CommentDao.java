@@ -11,6 +11,57 @@ import dao.*;
 
 public class CommentDao {
 	
+	//[all] book score print
+	public double selectOrderScoreAvg(int ebookNo) throws ClassNotFoundException, SQLException {
+		
+		double avgScore=0;
+		DBUtil dbutil = new DBUtil();
+		String sql = "select avg(order_score) av from order_comment where ebook_no=?";
+		Connection conn = dbutil.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, ebookNo);
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			avgScore= rs.getDouble("av");
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+		
+		return avgScore;
+	}
+	
+	//[all] book review list print
+	public ArrayList<Comment> selectOrderReviewByPage(int ebookNo, int beginRow, int ROW_PER_PAGE) throws SQLException, ClassNotFoundException {
+		
+		ArrayList<Comment> list = new ArrayList<Comment>();
+		Comment comment = null;//입력이상시 null
+		DBUtil dbutil = new DBUtil();
+		String sql = "select order_comment_content,order_score,create_date from order_comment where ebook_no=? limit ?,?";
+		Connection conn = dbutil.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, ebookNo);
+		stmt.setInt(2, beginRow);
+		stmt.setInt(3, ROW_PER_PAGE);
+		System.out.println(stmt+"<-----dao.selectOrderReviewByPage - stmt"); //check
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			comment = new Comment();
+			comment.setOrderCommentContent(rs.getString("order_comment_content"));
+			comment.setOrderScore(rs.getInt("order_score"));
+			comment.setCreateDate(rs.getString("create_date"));
+			list.add(comment);
+			System.out.println(list+"<--list");
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+		
+		return list;
+		
+	}
+	
+	
 	//[all] 
 	public void insertOrderCommentReview(Comment comment)throws SQLException, ClassNotFoundException {
 		

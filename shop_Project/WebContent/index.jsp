@@ -158,7 +158,7 @@
 					
 				</div>
 				
-				<div><a href=""><%=e.getEbookTitle() %></a></div>
+				<div><a href="<%=request.getContextPath() %>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>"><%=e.getEbookTitle() %></a></div>
 				<div><%=e.getEbookPrice() %></div>
 				
 			</td>
@@ -185,11 +185,11 @@
 				
 				<div>
 					
-					<div><a href=""><img src ="<%=request.getContextPath() %>/img/<%=e.getEbookImg() %>" width="200" height="200"></a></div>
+					<div><a href="<%=request.getContextPath() %>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>"><img src ="<%=request.getContextPath() %>/img/<%=e.getEbookImg() %>" width="200" height="200"></a></div>
 					
 				</div>
 				
-				<div><a href=""><%=e.getEbookTitle() %></a></div>
+				<div><a href="<%=request.getContextPath() %>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>"><%=e.getEbookTitle() %></a></div>
 				<div><%=e.getEbookPrice() %></div>
 				
 			</td>
@@ -217,8 +217,8 @@
 					
 					<td>
 							
-						<div><a href=""><img src ="<%=request.getContextPath() %>/img/<%=e.getEbookImg() %>" width="200" height="200"></a></div>
-						<div><a href=""><%=e.getEbookTitle() %></a></div>
+						<div><a href="<%=request.getContextPath() %>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>"><img src ="<%=request.getContextPath() %>/img/<%=e.getEbookImg() %>" width="200" height="200"></a></div>
+						<div><a href="<%=request.getContextPath() %>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>"><%=e.getEbookTitle() %></a></div>
 						<div>₩<%=e.getEbookPrice() %></div>
 						
 					</td>
@@ -228,7 +228,7 @@
 					i += 1;
 					if(i%5 == 0){
 			%>
-						
+							
 						</tr><tr><!-- next line -->
 						
 			<% 			
@@ -240,8 +240,7 @@
 		
 		</table>
 		
-		<a href="<%=request.getContextPath()%>/index.jsp?currentPage=<%=currentPage-1%>">이전</a>
-		<a href="<%=request.getContextPath()%>/index.jsp?currentPage=<%=currentPage+1%>">다음</a>
+		
 	
 	
 	</body>

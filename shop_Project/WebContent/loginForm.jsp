@@ -16,6 +16,7 @@
 
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!-- jquery -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 	</head>
@@ -46,7 +47,7 @@
 							
 						</div>
 						
-						<input type = "text" class="form-control" placeholder="아이디를 입력하세요" name="memberId">
+						<input type = "text" class="form-control" placeholder="아이디를 입력하세요" name="memberId" id ="memberId" value="">
 					
 					</div>
 					
@@ -58,19 +59,44 @@
 							
 						</div>
 					
-						<input type = "password" class="form-control" placeholder="비밀번호를 입력하세요" name="memberPw">
+						<input type = "password" class="form-control" placeholder="비밀번호를 입력하세요" name="memberPw" id="memberPw" value="">
 					
 					</div>
 					
-					<button type= "submit">로그인</button>
+					<button id="loginBtn"type= "button">로그인</button> <!--  21.09.28 don't using submit  -->
 				
 				</div>
 				
 			</div>		
 		
 		</form>
-	
 
+		<script>
+	
+			$('#loginBtn').click(function(){
+				//loginBtn push event
+				
+				if($('#memberId').val() == ""){ //id is "" 
+					
+					alert("Id empty");
+					return;
+					
+				}else if($('#memberPw').val() == ""){ // pw is ""
+					
+					alert("Pw empty");
+					return;	
+				
+				}else{
+				
+					$('#loginForm').submit();
+					
+				}
+				
+			});
+		
+		
+		</script>
+	
 	</body>
 
 </html>

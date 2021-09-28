@@ -94,20 +94,21 @@ public class EbookDao {
 		conn.close();
 		
 	}
-	
+	//[admin/all] load book info
 	public Ebook selectEbookOne(int ebookNo) throws ClassNotFoundException, SQLException {
 		Ebook ebook = null;
 		DBUtil dbutil = new DBUtil();
 		Connection conn = dbutil.getConnection();
-		String sql="SELECT ebook_no, ebook_img FROM ebook WHERE ebook_no=?";
+		String sql="SELECT ebook_no, ebook_img, ebook_price FROM ebook WHERE ebook_no=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, ebookNo);
-		System.out.println(); //占쏙옙占쏙옙占� stmt
+		System.out.println(stmt+"<----dao.selectEbookOne - stmt"); //check stmt
 		ResultSet rs = stmt.executeQuery();
 		if(rs.next()) {
 			ebook = new Ebook();
 			ebook.setEbookNo(rs.getInt("ebook_no"));
 			ebook.setEbookImg(rs.getString("ebook_img"));
+			ebook.setEbookPrice(rs.getInt("ebook_price"));
 		}
 		return  ebook;
 		

@@ -104,6 +104,7 @@
 	
 					System.out.println(memberList.size()+"<------ selectMember - list size check"); // 반환되어 저장된 값 확인
 					for(Member m : memberList){
+				
 				%>
 						<tr>
 						

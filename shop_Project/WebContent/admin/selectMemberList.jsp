@@ -54,14 +54,30 @@
 	
 	</head>
 
+	
+
 	<body>
 	
 		<div>
+		
 			<jsp:include page="/partial/adminMenu.jsp"></jsp:include>
+		
 		</div>
 		
-		<h1>회원 목록</h1>
-		<table border="1">
+		<br>
+		<br>
+		
+		<div class="container row" style="float: none; margin:0 auto;"> 
+
+			<div class="col-md-3" style="float: none; margin:0 auto;">
+		
+				<h1>회원 목록</h1>
+				
+			</div>
+		
+		</div>	
+		
+		<table class="table table-bordered">
 			<thead>
 				
 				<tr>
@@ -73,6 +89,7 @@
 					<th>memberGender</th>
 					<th>updateDate</th>
 					<th>createDate</th>
+					<th>회원등급</th>
 					<th>등급수정</th>
 					<th>비밀번호수정</th>
 					<th>강제탈퇴</th>
@@ -99,6 +116,20 @@
 							<td><%=m.getCreateDate() %></td>
 							
 							<td>
+								<%
+									if(m.getMemberLevel() == 0){
+								%>
+										<span>일반회원</span>
+								<%
+									}else if(m.getMemberLevel() == 1){
+								%>
+										<span>관리자</span>
+								<%		
+									}
+								%>
+							</td>
+					
+							<td>
 								<!-- 특정 회원의 등급을 수정 -->
 								<a href="<%=request.getContextPath()%>/admin/updateMemberLevelForm.jsp?memberNo=<%=m.getMemberNo()%>">등급수정</a>
 							
@@ -114,20 +145,6 @@
 								<!-- 특정 회원을 강제 탈퇴 -->
 								<a href="./deleteMemberForm.jsp?memberNo=<%=m.getMemberNo()%>">강제탈퇴</a>
 							
-							</td>
-							
-							<td>
-								<%
-									if(m.getMemberLevel() == 0){
-								%>
-										<span>일반회원</span>
-								<%
-									}else if(m.getMemberLevel() == 1){
-								%>
-										<span>관리자</span>
-								<%		
-									}
-								%>
 							</td>
 							
 						</tr>

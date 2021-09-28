@@ -16,21 +16,26 @@
 	
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 		
 	</head>
 
 	<body>
 	
 		<ul>
+			
+			<div class="row">
+			
+				<div class="col"><li><a href="<%=request.getContextPath()%>/admin/selectMemberList.jsp">[회원관리]</a></li></div>
+				<div class="col"><li><a href="<%=request.getContextPath()%>/admin/">[전자책 카테고리 관리]</a></li></div>
+				<div class="col"><li><a href="<%=request.getContextPath()%>/admin/">[전자책 관리]</a></li></div>
+				<div class="col"><li><a href="<%=request.getContextPath()%>/admin/">[주문 관리]</a></li></div>
+				<div class="col"><li><a href="<%=request.getContextPath()%>/admin/">[상품평 관리]</a></li></div>
+				<div class="col"><li><a href="<%=request.getContextPath()%>/admin/">[공지게시판 관리]</a></li></div>
+				<div class="col"><li><a href="<%=request.getContextPath()%>/admin/">[QnA게시판 관리]</a></li></div>
 		
-			<li><a href="<%=request.getContextPath()%>/admin/selectMemberList.jsp">[회원관리]</a></li>
-			<li><a href="<%=request.getContextPath()%>/admin/">[전자책 카테고리 관리]</a></li>
-			<li><a href="<%=request.getContextPath()%>/admin/">[전자책 관리]</a></li>
-			<li><a href="<%=request.getContextPath()%>/admin/">[주문 관리]</a></li>
-			<li><a href="<%=request.getContextPath()%>/admin/">[상품평 관리]</a></li>
-			<li><a href="<%=request.getContextPath()%>/admin/">[공지게시판 관리]</a></li>
-			<li><a href="<%=request.getContextPath()%>/admin/">[QnA게시판 관리]</a></li>
-		
+			</div>
+			
 		</ul>
 		
 	</body>

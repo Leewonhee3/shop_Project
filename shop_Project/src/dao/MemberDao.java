@@ -11,7 +11,6 @@ import vo.Member;
 
 public class MemberDao {
 	
-	
 	public Member selectMemberOne(Member member) throws ClassNotFoundException, SQLException{
 		DBUtil dbutil = new DBUtil();
 		Connection conn = dbutil.getConnection();
@@ -32,7 +31,7 @@ public class MemberDao {
 			stmt.close();
 			conn.close();
 			
-			return returnMember; // 로그인 성공시 아이디 이름 레벨 반환 실패시 null
+			return returnMember; //성공시 반환 실패시 null
 		}
 		
 		rs.close();
@@ -42,10 +41,8 @@ public class MemberDao {
 		return returnMember;
 	}
 	
-	
-	
 	//[관리자]회원 등급수정 - MemberNo와 수정될 Level를 받아서 update
-	public void updateMemberLevelByAdmin(Member member) throws ClassNotFoundException, SQLException {
+	public void updateMemberLevelByAdmin(Member member,String pw) throws ClassNotFoundException, SQLException {
 		DBUtil dbutil = new DBUtil();
 		Connection conn = dbutil.getConnection();
 		String sql="UPDATE member SET member_level=? WHERE member_no=?";
@@ -94,7 +91,6 @@ public class MemberDao {
 		return;
 	}
 	
-	
 	//[관리자]회원 강제탈퇴 - MemberNo를 받아서 delete
 	public void deleteMemberByAdmin(int memberNo) throws ClassNotFoundException, SQLException {
 		
@@ -118,8 +114,6 @@ public class MemberDao {
 		return;
 		
 	}
-	
-	
 	
 	//[관리자]회원 아이디 검색
 	
@@ -288,7 +282,7 @@ public class MemberDao {
 		System.out.println(member.getMemberPw()+"<--- dao.login  - memberPw");
 		//파라미터 확인
 		Connection conn = dbUtil.getConnection();
-		String sql ="SELECT member_no memberNo, member_id memberId,member_name memberName, member_level memberLevel FROM member WHERE member_id=? AND member_pw=password(?);";
+		String sql ="SELECT member_no memberNo, member_id memberId,member_name memberName, member_level memberLevel,member_pw memberPw FROM member WHERE member_id=? AND member_pw=password(?);";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, member.getMemberId()); //아이디
 		stmt.setString(2, member.getMemberPw()); //패스워드
@@ -305,6 +299,7 @@ public class MemberDao {
 			returnMember.setMemberId(rs.getString("memberId")); //아이디 String
 			returnMember.setMemberName(rs.getString("memberName")); // 이름 String
 			returnMember.setMemberLevel(rs.getInt("memberLevel")); // 레벨 int
+			returnMember.setMemberPw(rs.getString("memberPw")); // 패스워드 String
 			System.out.println("login ok");
 			rs.close();
 			stmt.close();

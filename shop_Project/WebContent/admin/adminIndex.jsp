@@ -17,28 +17,53 @@
 	
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 		
 	</head>
 
-	<body>
-		<!-- 관리자 메뉴 include -->
+	<!-- 관리자 메뉴 include -->
 		
-		<!-- start : submenu include -->
-		<div>
+	<!-- start : submenu include -->
+	<div>
 				
-			<jsp:include page="/partial/adminMenu.jsp"></jsp:include>
+		<div class="row">
+			
+			<div class="col"><jsp:include page="/partial/adminMenu.jsp"></jsp:include></div>
 				
 		</div>
-		<!-- end : submenu include -->
+				
+	</div>
+	<!-- end : submenu include -->
 		
-		<h1>관리자페이지</h1>
+	<body>
 		
-		<div><%=loginMember.getMemberId()%></div>
+		<br>
+		<br>
 		
-		<div><a href="<%=request.getContextPath()%>/admin/selectMemberList.jsp">회원목록</a></div>
+		<div class="container row" style="float: none; margin:0 auto;"> 
+
+			<div class="col-md-3" style="float: none; margin:0 auto;">
+
+				<h1>관리자 메인</h1>
+			
+			</div>
+			
+		</div>
 		
+		<div class="container row" style="float: none; margin:0 auto;"> 
+
+			<div class="col-md-3" style="float: none; margin:0 auto;">
 		
-		<div><a class="btn btn-warning" href="<%=request.getContextPath()%>/index.jsp">뒤로가기</a></div>
+				<div><%=loginMember.getMemberId()%></div>
+				
+				<div><a href="<%=request.getContextPath()%>/admin/selectMemberList.jsp">회원목록</a></div>
+				
+				
+				<div><a class="btn btn-warning" href="<%=request.getContextPath()%>/index.jsp">뒤로가기</a></div>
+				
+			</div>
+		
+		</div>
 		
 	</body>
 	

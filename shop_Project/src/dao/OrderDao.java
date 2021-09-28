@@ -8,7 +8,33 @@ import vo.*;
 import commons.*;
 //[admin/all] order method 
 public class OrderDao {
-
+	
+	//[all] Personal book order insert
+	public void insertMemberOrder(int ebookNo, int memberNo, int ebookPrice) throws ClassNotFoundException, SQLException {
+		
+		int check = 0; //check
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "INSERT INTO orders(ebook_no,member_no,order_price,order_date,update_date) VALUES(?,?,?,NOW(),NOW())";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, ebookNo);
+		stmt.setInt(2, memberNo);
+		stmt.setInt(3, ebookPrice);
+		System.out.println(stmt+"<---dao.insertMemberOrder - stmt");
+		check = stmt.executeUpdate();
+		if(check == 0) {
+			System.out.println("error");
+		}else {
+			System.out.println("OK!");
+		}
+		
+		stmt.close();
+		conn.close();
+		
+		return;
+	}
+	
+	
 	//[all] Personal order list	
 	public ArrayList<OrderEbookMember> selectMemberOrderList(int beginRow, int rowPerPage, int memberNo) throws ClassNotFoundException, SQLException{
 		

@@ -16,6 +16,7 @@
 
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!-- jquery -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 	</head>
@@ -40,6 +41,7 @@
 				memberIdCheck = request.getParameter("memberIdCheck"); // 실행
 			}
 			
+			
 		%>
 		<%
 			if(request.getParameter("idCheckResult")==null){
@@ -51,6 +53,12 @@
 		%>
 				<div><%=request.getParameter("idCheckResult") %></div> <!-- 이미 사용중인 아이디 -->
 		<% 		
+			}
+		
+			if(insertId == null){ // null인경우 공백 입력
+			
+				insertId="";
+				
 			}
 		
 		%>
@@ -76,33 +84,74 @@
 		
 		<!-- 회원가입 폼 -->
 		
-		<form method="post" action="<%=request.getContextPath() %>/insertMemberAction.jsp">
-				<!-- 아이디 -->
-				<div>memberId: </div>
-				<div><input type = "text" name="memberId" readonly="readonly" value="<%=insertId%>"></div>
-				<!-- 패스워드 -->
-				<div>memberPw: </div>
-				<div><input type = "password" name="memberPw"></div>
-				<!-- 이름 -->
-				<div>memberName: </div>
-				<div><input type = "text" name="memberName"></div>
-				<!-- 나이 -->
-				<div>memberAge: </div>
-				<div><input type = "text" name="memberAge"></div>
-				<!-- 성별 -->
-				<div>memberGender: </div>
-				
-				<div>
-				
-					<input type = "radio" name="memberGender" value = "남">남
-					<input type = "radio" name="memberGender" value = "여">여
-				
-				</div>
-				
-				
-				<button type= "submit">회원가입</button>
+		<form method="post" action="<%=request.getContextPath() %>/insertMemberAction.jsp" id="joinForm">
+		
+			<!-- 아이디 -->
+			<div>memberId: </div>
+			<div><input type = "text" name="memberId" id="memberId" readonly="readonly" value="<%=insertId%>"></div>
 			
-			</form>
+			<!-- 패스워드 -->
+			<div>memberPw: </div>
+			<div><input type = "password" name="memberPw" id= "memberPw" value=""></div>
+			
+			<!-- 이름 -->
+			<div>memberName: </div>
+			<div><input type = "text" name="memberName" id="memberName" value=""></div>
+				
+			<!-- 나이 -->
+			<div>memberAge: </div>
+			<div><input type = "text" name="memberAge" id="memberAge" value=""></div>
+				
+			<!-- 성별 -->
+			<div>memberGender: </div>
+				
+			<div>
+				
+				<input type = "radio" name="memberGender" class="memberGender" value = "남">남
+				<input type = "radio" name="memberGender" class="memberGender" value = "여">여
+			
+			</div>
+			
+			<button type= "button" id="btn">회원가입</button>
+			
+		</form>
+		
+		<script>
+		
+			$("#btn").click(function(){
+				
+				if($("#memberId").val() == ''){
+					alert("memberId empty");
+					return;
+				}
+				
+				if($("#memberPw").val() == ''){
+					alert("memberPw empty");
+					return;
+				}
+				
+				if($("#memberName").val() == ''){
+					alert("memberName empty");
+					return;
+				}
+				
+				if($("#memberAge").val() == ''){
+					alert("memberAge empty");
+					return;
+				}
+				
+				let memberGedner = $('.memberGender:checked'); // . 클래스속성으로 부르면 리턴값은 배열
+			    if(memberGedner.length == 0) {
+			    	alert('memberGender를 선택하세요');
+			        return;
+			    }
+			         
+			    $('#joinForm').submit();
+			    
+			});
+
+		
+		</script>	
 
 	</body>
 

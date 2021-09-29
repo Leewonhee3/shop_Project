@@ -23,25 +23,25 @@
 				    	
 				    <li class="nav-item">
 				      	
-				      	<a class="nav-link" href="<%=request.getContextPath()%>/admin/">[1]</a>
+				      	<a class="nav-link" href="<%=request.getContextPath()%>/selectOrderListByMember.jsp">[주문정보]</a>
 				    	
 				    </li>
 				    	
 				    <li class="nav-item">
 				      	
-				      	<a class="nav-link" href="<%=request.getContextPath()%>/admin/">[2]</a>
+				      	<a class="nav-link" href="<%=request.getContextPath()%>/selectQnAList.jsp">[Q&A게시판]</a>
 				   
 				    </li>
 				    	
 				    <li class="nav-item">
 				      	
-				      	<a class="nav-link" href="<%=request.getContextPath()%>/admin/">[3]</a>
+				      	<a class="nav-link" href="<%=request.getContextPath()%>/selectNoticeList.jsp">[공지사항]</a>
 				    	
 				    </li>
 				    	
 				    <li class="nav-item">
 				      	
-				      	<a class="nav-link" href="<%=request.getContextPath()%>/admin/">[4]</a>
+				      	<a class="nav-link" href="<%=request.getContextPath()%>/admin/">[마이페이지]</a>
 				    	
 				    </li>
 				    	

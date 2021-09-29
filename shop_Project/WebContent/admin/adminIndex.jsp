@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "vo.*" %>
+<%@ page import = "vo.*" import = "dao.*" import = "java.util.*" %>
 <%
+
 	request.setCharacterEncoding("utf-8");
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	if(loginMember == null || loginMember.getMemberLevel() < 1) {
@@ -10,6 +11,11 @@
    		return;
 	
 	} // 세션이 null이거나 레벨이 0인경우 일반 인덱스 페이지로 이동 
+	
+	MemberDao memberDao = new MemberDao();
+	NoticeDao noticeDao = new NoticeDao();
+	ArrayList<Notice> noticeList = noticeDao.selectNoticeNewest();
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -22,57 +28,22 @@
 		
 	</head>
 
-<<<<<<< HEAD
-	<!-- 관리자 메뉴 include -->
-=======
 	<body class="bg-secondary text-white">
+
+		<!-- start : submenu include -->
+		
+		<div>
+					
+			<div class="row">
+				
+				<div class="col"><jsp:include page="/partial/adminMenu.jsp"></jsp:include></div>
+					
+			</div>
+					
+		</div>
+		
+		<!-- end : submenu include -->
 	
-		<!-- 관리자 메뉴 include -->
->>>>>>> ce854bba22e3187dcb03732f5cf4982cbaf57825
-		
-	<!-- start : submenu include -->
-	<div>
-				
-		<div class="row">
-			
-			<div class="col"><jsp:include page="/partial/adminMenu.jsp"></jsp:include></div>
-				
-		</div>
-				
-	</div>
-	<!-- end : submenu include -->
-		
-<<<<<<< HEAD
-	<body>
-		
-		<br>
-		<br>
-		
-		<div class="container row" style="float: none; margin:0 auto;"> 
-
-			<div class="col-md-3" style="float: none; margin:0 auto;">
-
-				<h1>관리자 메인</h1>
-			
-			</div>
-			
-		</div>
-		
-		<div class="container row" style="float: none; margin:0 auto;"> 
-
-			<div class="col-md-3" style="float: none; margin:0 auto;">
-		
-				<div><%=loginMember.getMemberId()%></div>
-				
-				<div><a href="<%=request.getContextPath()%>/admin/selectMemberList.jsp">회원목록</a></div>
-				
-				
-				<div><a class="btn btn-warning" href="<%=request.getContextPath()%>/index.jsp">뒤로가기</a></div>
-				
-			</div>
-		
-		</div>
-=======
 		<br>
 		<br>		
 		
@@ -155,7 +126,7 @@
 					
 					<tr>
 					      
-						<td><br><a href="<%=request.getContextPath()%>/admin/selectNoticeBoardList.jsp">공지게시판 관리</a></td>
+						<td><br><a href="<%=request.getContextPath()%>/admin/selectNoticeList.jsp">공지게시판 관리</a></td>
 						<td>공지게시판을 관리하는 기능입니다.</td>
 					        
 					</tr>
@@ -177,8 +148,48 @@
 		<br>
 		
 		<div>&nbsp<a class="btn btn-primary btn-sm" href="<%=request.getContextPath()%>/index.jsp">메인페이지로 가기</a></div>
->>>>>>> ce854bba22e3187dcb03732f5cf4982cbaf57825
 		
+		<table border="1">
+			
+			<thead>
+					
+				<tr>
+					
+					<th>게시번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+						
+				</tr>
+				
+			</thead>
+				
+			<tbody>
+					
+				<%
+						
+					for(Notice n : noticeList){
+					
+				%>
+					
+						<tr>
+							
+							<td><%=n.getNoticeNo() %></td>
+							<td width ="500"><a href="<%=request.getContextPath() %>/admin/selectNoticeOne.jsp?noticeNo=<%=n.getNoticeNo()%>"><%=n.getNoticeTitle()%></a></td>
+							<td><%=memberDao.selectMemberConvertName(n.getMemberNo()) %></td>
+							<td><%=n.getCreateDate() %></td>
+							
+						</tr>
+					
+				<% 
+							
+					}
+				%>
+					
+			</tbody>
+			
+		</table>	
+	
 	</body>
 	
 </html>

@@ -2,7 +2,13 @@
 <%@ page import="vo.*" %>
 <%@ page import="dao.*" %>
 <%@ page import="java.util.*" %>
+<%
 
+	MemberDao memberDao = new MemberDao();
+	NoticeDao noticeDao = new NoticeDao();
+	ArrayList<Notice> noticeList = noticeDao.selectNoticeNewest();
+
+%>
 <!DOCTYPE html>
 <html>
 
@@ -16,13 +22,13 @@
 	
 	<body>
 	
-		<!-- start : submenu include -->
+		<!-- start : mainmenu include -->
 		<div>
 			
 			<jsp:include page="/partial/mainMenu.jsp"></jsp:include>
 			
 		</div>
-		<!-- end : submenu include -->
+		<!-- end : mainmenu include -->
 	
 		<div class="container">
 			
@@ -100,6 +106,11 @@
 				<p>이것저것</p>
 			
 			</div>
+			
+			
+			
+			<!-- notice list -->
+			
 			<!-- 상품 목록 -->
 			
 			<%
@@ -315,6 +326,47 @@
 				%>
 			
 		</div>
+		
+		<table border="1">
+			
+			<thead>
+					
+				<tr>
+					
+					<th>게시번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+						
+				</tr>
+				
+			</thead>
+				
+			<tbody>
+					
+				<%
+						
+					for(Notice n : noticeList){
+					
+				%>
+					
+						<tr>
+							
+							<td><%=n.getNoticeNo() %></td>
+							<td width ="500"><a href="<%=request.getContextPath() %>/admin/selectNoticeOne.jsp?noticeNo=<%=n.getNoticeNo()%>"><%=n.getNoticeTitle()%></a></td>
+							<td><%=memberDao.selectMemberConvertName(n.getMemberNo()) %></td>
+							<td><%=n.getCreateDate() %></td>
+							
+						</tr>
+					
+				<% 
+							
+					}
+				%>
+					
+			</tbody>
+			
+		</table>	
 	
 	</body>
 	

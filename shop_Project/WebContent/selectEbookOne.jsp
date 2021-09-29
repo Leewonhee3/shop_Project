@@ -110,6 +110,7 @@
 				<!-- select * from order_comment where ebook_no=? limit ?,? -->
 				
 				<%
+					
 					ArrayList<Comment> commentList = commentDao.selectOrderReviewByPage(ebookNo, beginRow, ROW_PER_PAGE);	
 					int i=0;
 					for(Comment c : commentList){

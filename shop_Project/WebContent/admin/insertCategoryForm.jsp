@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "vo.*" %>
+
 <%
 	request.setCharacterEncoding("utf-8");
 	Member loginMember = (Member)session.getAttribute("loginMember");
@@ -11,6 +12,7 @@
 	
 	} // 세션이 null이거나 레벨이 0인경우 일반 인덱스 페이지로 이동 
 %>
+
 <!DOCTYPE html>
 <html>
 
@@ -64,30 +66,29 @@
 		</form>
 		
 		
-		<form method="get" action="<%=request.getContextPath() %>/admin/insertCategoryAction.jsp">
-				<!-- 카테고리명 -->
-				<div>categoryName : </div>
-				<div><input type = "text" name="categoryName" readonly="readonly" value="<%=insertName%>"></div>
-				<!-- 카테고리 활성화 여부 -->
+		<form method="post" action="<%=request.getContextPath() %>/admin/insertCategoryAction.jsp">
 				
-				<div>category_state : </div>
+			<!-- 카테고리명 -->
+			<div>categoryName : </div>
+			<div><input type = "text" name="categoryName" readonly="readonly" value="<%=insertName%>"></div>
+			<!-- 카테고리 활성화 여부 -->
 				
-				<div>
+			<div>category_state : </div>
 				
-					<select name = "state">
+			<div>
+				
+				<select name = "state">
 					
-						<option value="Y">Y</option>
-						<option value="N">N</option>
+					<option value="Y">Y</option>
+					<option value="N">N</option>
 					
-					</select>
+				</select>
 					
-				</div>
+			</div>
 				
-				<button type= "submit">추가</button>
+			<button type= "submit">추가</button>
 			
-			</form>
-		
-		
+		</form>
 		
 	</body>
 

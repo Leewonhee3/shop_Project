@@ -11,6 +11,26 @@ import vo.Member;
 
 public class MemberDao {
 	
+	//[all] convert memberId to memberName
+	public String selectMemberConvertName(int memberNo) throws ClassNotFoundException, SQLException {
+		String name = "";
+		DBUtil dbutil = new DBUtil();
+		Connection conn = dbutil.getConnection();
+		String sql="SELECT member_name FROM member WHERE member_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, memberNo);
+		System.out.println(stmt+"<---------dao.selectMemberConvertName - stmt");
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+		
+			System.out.println("dao.selectMemberConvertName OK");
+			name = rs.getString("member_name");
+		}
+		
+		return name;
+	}
+	
+	
 	//[회원] 회원가입시 아이디 중복검사 메소드
 	public String selectMemberId(String memberIdCheck) throws ClassNotFoundException, SQLException{
 		String memberId = null;

@@ -23,23 +23,7 @@
 	</head>
 
 	<body>
-	
-		<ul>
-			
-			<div class="row">
-			
-				<div class="col"><li><a href="<%=request.getContextPath()%>/admin/selectMemberList.jsp">[회원관리]</a></li></div>
-				<div class="col"><li><a href="<%=request.getContextPath()%>/admin/">[전자책 카테고리 관리]</a></li></div>
-				<div class="col"><li><a href="<%=request.getContextPath()%>/admin/">[전자책 관리]</a></li></div>
-				<div class="col"><li><a href="<%=request.getContextPath()%>/admin/">[주문 관리]</a></li></div>
-				<div class="col"><li><a href="<%=request.getContextPath()%>/admin/">[상품평 관리]</a></li></div>
-				<div class="col"><li><a href="<%=request.getContextPath()%>/admin/">[공지게시판 관리]</a></li></div>
-				<div class="col"><li><a href="<%=request.getContextPath()%>/admin/">[QnA게시판 관리]</a></li></div>
-		
-			</div>
-			
-		</ul>
-		
+
 			<!-- 
 			
 				1)Category.class // 카테고리 클래스
@@ -92,7 +76,7 @@
 		    	
 		    	<li class="nav-item">
 		      	
-		      		<a class="nav-link" href="<%=request.getContextPath()%>/admin/selectNoticeBoardList.jsp">[공지게시판 관리]</a>
+		      		<a class="nav-link" href="<%=request.getContextPath()%>/admin/selectNoticeList.jsp">[공지게시판 관리]</a>
 		    	
 		    	</li>
 		    	

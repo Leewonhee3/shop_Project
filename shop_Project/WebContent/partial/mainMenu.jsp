@@ -14,20 +14,8 @@
 	</head>
 	
 	<body>
-	
-<<<<<<< HEAD
-		<div class="row">
 		
-	  		<div class="col"><li><a href="">menuOne</a></li></div>
-	  		<div class="col"><li><a href="">menu2</a></li></div>
-	  		<div class="col"><li><a href="">menu3</a></li></div>
-	  		<div class="col"><li><a href="">menu4</a></li></div>
-	  		<div class="col"><li><a href="">menu5</a></li></div>
-	  		
-=======
-		<div>
-			
-			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 				  
 				<a class="navbar-brand" href="<%=request.getContextPath()%>/index.jsp">메인 페이지</a>
 				    
@@ -73,9 +61,8 @@
 		  	
 			</nav>
 		
->>>>>>> ce854bba22e3187dcb03732f5cf4982cbaf57825
 		</div>
-	
+			
 	</body>
 	
 </html>

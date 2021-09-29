@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "vo.*" %>
+
 <%
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	if(loginMember == null || loginMember.getMemberLevel() < 1) {
@@ -9,8 +10,8 @@
 	
 	} // 세션이 null이거나 레벨이 0인경우 일반 인덱스 페이지로 이동 
 %>
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html>
 
 	<head>
@@ -22,7 +23,6 @@
 	</head>
 
 	<body>
-<<<<<<< HEAD
 	
 		<ul>
 			
@@ -39,7 +39,7 @@
 			</div>
 			
 		</ul>
-=======
+		
 			<!-- 
 			
 				1)Category.class // 카테고리 클래스
@@ -51,6 +51,7 @@
 				7)updateCategoryStateAction.jsp //카테고리 사용유무 설정
 			
 			 -->
+		
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		  
 			<a class="navbar-brand" href="<%=request.getContextPath()%>/admin/adminIndex.jsp">관리자 페이지</a>
@@ -104,7 +105,6 @@
 		  	</ul>
   	
 		</nav>
->>>>>>> ce854bba22e3187dcb03732f5cf4982cbaf57825
 		
 	</body>
 	

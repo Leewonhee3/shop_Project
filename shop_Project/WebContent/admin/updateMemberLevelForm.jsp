@@ -2,10 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "vo.*" import= "dao.*" import = "java.util.*" %>
 <%
-<<<<<<< HEAD
-=======
+
 	request.setCharacterEncoding("utf-8");
->>>>>>> ce854bba22e3187dcb03732f5cf4982cbaf57825
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	if(loginMember == null || loginMember.getMemberLevel() < 1) {
 		System.out.println("오류");

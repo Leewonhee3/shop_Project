@@ -9,6 +9,26 @@ import vo.*;
 
 public class EbookDao {
 	
+	//[all] category data count
+	public int totalEbookCount(String ebookCategory) throws ClassNotFoundException, SQLException {
+		
+		DBUtil dbutil = new DBUtil();
+		Connection conn = dbutil.getConnection();
+		String sql="SELECT COUNT(*) FROM ebook WHERE category_name=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, ebookCategory);
+		System.out.println(stmt+"<----- dao.totalEbookCount - stmt"); //check
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			System.out.println("dao.totalEbookCount - OK!");
+			return rs.getInt("COUNT(*)");
+		}
+	
+		return 0;
+	}
+	
+	
+	
 	//[all] most recent book list print
 	public ArrayList<Ebook> selectNewEbookList(int beginRow, int ROW_PER_PAGE) throws ClassNotFoundException, SQLException {
 		ArrayList<Ebook> list = new ArrayList<Ebook>();

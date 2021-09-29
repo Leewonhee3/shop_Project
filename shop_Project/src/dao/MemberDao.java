@@ -11,8 +11,6 @@ import vo.Member;
 
 public class MemberDao {
 	
-<<<<<<< HEAD
-=======
 	//[회원] 회원가입시 아이디 중복검사 메소드
 	public String selectMemberId(String memberIdCheck) throws ClassNotFoundException, SQLException{
 		String memberId = null;
@@ -39,7 +37,6 @@ public class MemberDao {
 	
 	
 	//회원 정보를 반환하는 메소드
->>>>>>> ce854bba22e3187dcb03732f5cf4982cbaf57825
 	public Member selectMemberOne(Member member) throws ClassNotFoundException, SQLException{
 		DBUtil dbutil = new DBUtil();
 		Connection conn = dbutil.getConnection();

@@ -14,6 +14,83 @@
 	</head>
 	
 	<body>
+			
+		<ul id="nav3" class="nav justify-content-center bg-primary"> 
+				
+			<li class="nav-item"> 
+				
+				<a class="nav-link active text-white" href="#">Home</a> 
+				
+			</li> 
+				
+			<li class="nav-item"> 
+					
+				<a class="nav-link text-white" href="#">Link1</a> 
+				
+			</li> 
+				
+			<li class="nav-item"> 
+				
+				<a class="nav-link text-white" href="#">Link2</a> 
+					
+			</li> 
+				
+			<li class="nav-item"> 
+					
+				<a class="nav-link text-white" href="#">Link3</a> 
+				
+			</li> 
+				
+			<li class="nav-item"> 
+				
+				<a class="nav-link text-white" href="#">Link4</a> 
+					
+			</li> 
+				
+			<li class="nav-item"> 
+				
+				<a class="nav-link disabled text-white" href="#">Disabled</a> 
+					
+			</li> 
+			
+			<div class="px-5"></div>
+			<div class="px-5"></div>
+			<div class="px-5"></div>
+			
+			<li class="nav-item"> 
+				
+				<small><a class="nav-link disabled text-white" href="#">login or logout</a></small>
+					
+			</li> 
+			
+			
+			<li class="nav-item"> 
+				
+				<small><a class="nav-link disabled text-white" href="#">mypage</a></small>
+					
+			</li>
+			
+			<li class="nav-item"> 
+				
+				<small><a class="nav-link disabled text-white" href="#">장바구니</a></small>
+					
+			</li>
+			
+			<li class="nav-item"> 
+				
+				<small><a class="nav-link disabled text-white" href="#">주문내역</a></small>
+					
+			</li> 
+			
+			<li class="nav-item"> 
+				
+				<small><a class="nav-link disabled text-white" href="#">고객센터</a></small>
+					
+			</li> 
+			 
+		</ul>
+
+		
 		
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 				  

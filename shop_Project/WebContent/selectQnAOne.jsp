@@ -5,11 +5,14 @@
 <%
 
 	request.setCharacterEncoding("utf-8");
-	System.out.println(request.getParameter("noticeNo")+"<----- selectNoticeOne - noticeNo");
-	int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
-	NoticeDao noticeDao = new NoticeDao();
-	Notice notice = noticeDao.selectNoticeOne(noticeNo);
+	System.out.println(request.getParameter("qnaNo")+"<----- selectQnAOne - qnaNo"); //check
+	
+	int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
+	
 	MemberDao memberDao = new MemberDao();
+	QnADao qnaDao = new QnADao();
+	QnA qna = qnaDao.selectQnAOne(qnaNo);
+	
 	
 %>
 
@@ -32,12 +35,13 @@
 			
 		</div>
 		<!-- end : mainmenu include -->
-			
+		
 		<table border="1">
 		
 			<thead>
 				
 					<th>글번호</th>
+					<th>카테고리</th>
 					<th>제목</th>
 					<th>글쓴이</th>
 					<th>작성일</th>
@@ -48,18 +52,23 @@
 				
 				<tr>
 				
-					<td><%=notice.getNoticeNo() %></td>
-					<td><%=notice.getNoticeTitle() %></td>
-					<td><%=memberDao.selectMemberConvertName(notice.getMemberNo()) %></td>
-					<td><%=notice.getCreateDate() %></td>
+					<td><%=qna.getQnaNo() %></td>
+					<td><%=qna.getQnaCategory() %></td>
+					<td><%=qna.getQnaTitle() %></td>
+					<td><%=memberDao.selectMemberConvertName(qna.getMemberNo()) %></td>
+					<td><%=qna.getCreateDate() %></td>
 				
 				</tr>
 			
 			</tbody>
 			
 			<tr>
+			
+				<td>
 				
-				<td><%=notice.getNoticeContent() %></td>
+					내용 : <%=qna.getQnaContent() %>
+				
+				</td>
 			
 			</tr>
 			

@@ -48,7 +48,7 @@ public class NoticeDao {
 		int check=0; //success check
 		DBUtil dbutil = new DBUtil();
 		Connection conn = dbutil.getConnection();
-		String sql="DELETE FROM notice WHERE member_No=? AND notice_No=?";
+		String sql="DELETE FROM notice WHERE member_no=? AND notice_no=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, notice.getMemberNo());
 		stmt.setInt(2, notice.getNoticeNo());

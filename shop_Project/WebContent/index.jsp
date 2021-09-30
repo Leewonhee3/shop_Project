@@ -353,7 +353,7 @@
 						<tr>
 							
 							<td><%=n.getNoticeNo() %></td>
-							<td width ="500"><a href="<%=request.getContextPath() %>/admin/selectNoticeOne.jsp?noticeNo=<%=n.getNoticeNo()%>"><%=n.getNoticeTitle()%></a></td>
+							<td width ="500"><a href="<%=request.getContextPath() %>/selectNoticeOne.jsp?noticeNo=<%=n.getNoticeNo()%>"><%=n.getNoticeTitle()%></a></td>
 							<td><%=memberDao.selectMemberConvertName(n.getMemberNo()) %></td>
 							<td><%=n.getCreateDate() %></td>
 							

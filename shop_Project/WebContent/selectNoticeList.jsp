@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="vo.*" import="dao.*" import="java.util.*" %>    
+
 <%
 	
 	int currentPage= 1; 
@@ -19,6 +20,7 @@
 	System.out.println(noticeList.get(1).getNoticeNo()+"<-----selectNoticeList - noticeList");
 
 %>
+
 <!DOCTYPE html>
 <html>
 

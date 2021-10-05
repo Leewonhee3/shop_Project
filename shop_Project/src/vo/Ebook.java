@@ -95,4 +95,22 @@ public class Ebook {
 		this.updateDate = updateDate;
 	}
 	
+	public String toString() {
+		
+		return "ebookNo : " + ebookNo +"\n"+
+			   "ebookISBN : " + ebookISBN +"\n"+
+			   "categoryName : " + categoryName +"\n"+
+			   "ebookTitle : " + ebookTitle +"\n"+
+			   "ebookAuthor : " + ebookAuthor +"\n"+
+			   "ebookCompany : " + ebookCompany +"\n"+
+			   "ebookPageCount : " + ebookPageCount +"\n"+
+			   "ebookPrice : " + ebookPrice +"\n"+
+			   "ebookImg : " + ebookImg +"\n"+
+			   "ebookSummary : " + ebookSummary +"\n"+
+			   "ebookState : " + ebookState +"\n"+
+			   "createDate : " + createDate +"\n"+
+			   "updateDate : " + updateDate +"\n";
+	
+	}
+	
 }

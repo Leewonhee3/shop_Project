@@ -45,5 +45,16 @@ public class Comment {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
+	
+	public String toString() {
+		
+		return "orderNo : " + orderNo +"\n"+
+			   "ebookNo : " + ebookNo +"\n"+
+			   "orderScore : " + orderScore +"\n"+
+			   "orderCommentContent : " + orderCommentContent +"\n"+
+			   "createDate : " + createDate +"\n"+
+			   "updateDate : " + updateDate +"\n";
+	
+	}
 
 }

@@ -39,4 +39,14 @@ public class QnAComment {
 		this.updateDate = updateDate;
 	}
 	
+	public String toString() {
+		
+		return "qnaNo : " + qnaNo +"\n"+
+			   "qnaCommentContent : " + qnaCommentContent +"\n"+
+			   "memberNo : " + memberNo +"\n"+
+			   "createDate : " + createDate +"\n"+
+			   "updateDate : " + updateDate +"\n";
+	
+	}
+	
 }

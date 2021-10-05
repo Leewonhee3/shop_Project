@@ -1,6 +1,6 @@
 package vo;
 
-public class Category {
+public class Category extends Object {
 	private String categoryName;
 	private String updateDate;
 	private String createDate;
@@ -29,5 +29,14 @@ public class Category {
 	}
 	public void setCategoryState(String categoryState) {
 		this.categoryState = categoryState;
+	}
+	
+	public String toString() {
+		
+		return "categoryName : " + categoryName +"\n"+
+			   "updateDate : " + updateDate +"\n"+
+			   "createDate : " + createDate +"\n"+
+			   "categoryState : " + categoryState +"\n";
+	
 	}
 }

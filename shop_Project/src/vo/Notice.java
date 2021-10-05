@@ -7,6 +7,7 @@ public class Notice {
 	private int memberNo;
 	private String createDate;
 	private String updateDate;
+	
 	public int getNoticeNo() {
 		return noticeNo;
 	}
@@ -42,6 +43,17 @@ public class Notice {
 	}
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
+	}
+	
+	public String toString() {
+		
+		return "noticeNo : " + noticeNo +"\n"+
+			   "noticeTitle : " + noticeTitle +"\n"+
+			   "noticeContent : " + noticeContent +"\n"+
+			   "memberNo : " + memberNo +"\n"+
+			   "createDate : " + createDate +"\n"+
+			   "updateDate : " + updateDate +"\n";
+	
 	}
 	
 }

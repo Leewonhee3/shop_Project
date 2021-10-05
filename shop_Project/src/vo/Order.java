@@ -1,7 +1,7 @@
 package vo;
 
 public class Order {
-	// private Ebook ebook; FM이지만 실무에서 안쓸수도 있음.
+	// private Ebook ebook; FM�씠吏�留� �떎臾댁뿉�꽌 �븞�벝�닔�룄 �엳�쓬.
 	private int orderNo;
 	private int ebookNo;
 	private int memberNo;
@@ -44,6 +44,18 @@ public class Order {
 	}
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
+	}
+	
+	public String toString() {
+		
+		return "orderNo : " + orderNo +"\n"+
+			   "ebookNo : " + ebookNo +"\n"+
+			   "memberNo : " + memberNo +"\n"+
+			   "memberNo : " + memberNo +"\n"+
+			   "orderPrice : " + orderPrice+"\n"+ 
+			   "createDate : " + orderDate +"\n"+
+			   "updateDate : " + updateDate +"\n";
+	
 	}
 	
 }

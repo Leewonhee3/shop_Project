@@ -142,7 +142,53 @@ public class QnADao {
 	
 	// qna update
 	
+	public void updateQnAByMember(QnA qna) throws ClassNotFoundException, SQLException {
+		
+		int check=0; //success check
+		DBUtil dbutil = new DBUtil();
+		Connection conn = dbutil.getConnection();
+		String sql="UPDATE qna SET qna_category=?, qna_title=?, qna_content=?, qna_secret=?, update_date=NOW() WHERE member_no=? AND qna_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, qna.getQnaCategory());
+		stmt.setString(2, qna.getQnaTitle());
+		stmt.setString(3, qna.getQnaContent());
+		stmt.setString(4, qna.getQnaSecret());
+		stmt.setInt(5, qna.getMemberNo());
+		stmt.setInt(6, qna.getQnaNo());
+		
+		System.out.println(stmt+"<----- dao.updateQnAByMember - stmt"); //check
+		check = stmt.executeUpdate();
+		
+		if(check==0) {
+			
+			System.out.println("<---- error by updateQnAByMember");
+			
+		}else {
+			
+			System.out.println("<---- success by updateQnAByMember");
+			
+		}
+		
+		stmt.close();
+		conn.close();
+		
+		return;
+		
+	}
+	
 	// qna Waiting select
 	
+	public ArrayList<QnA> selectWaitingQnAList() {
+		
+		ArrayList<QnA> list = new ArrayList<QnA>();
+		
+		
+		return list;
+	}
+	
 	// qna count, qna category count
+	
+	public void QnACount() {
+		
+	}
 }

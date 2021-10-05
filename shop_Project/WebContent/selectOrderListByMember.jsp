@@ -30,6 +30,9 @@
 	CommentDao commentDao =  new CommentDao();
 	ArrayList<OrderEbookMember> list = orderDao.selectMemberOrderList(beginRow, ROW_PER_PAGE,member.getMemberNo());
 	
+	System.out.println("!!!!!!!!!!!!!!selectOrderListByMember - test!!!!!!!!!");
+	System.out.println(list.get(0).toString());
+	
 %> 
 <!DOCTYPE html>
 <html>

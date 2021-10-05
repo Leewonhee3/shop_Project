@@ -60,4 +60,17 @@ public class QnA {
 		this.updateDate = updateDate;
 	}
 	
+	public String toString() {
+		
+		return "qnaNo : " + qnaNo +"\n"+
+			   "qnaCategory : " + qnaCategory +"\n"+
+			   "qnaTitle : " + qnaTitle +"\n"+
+			   "qnaContent : " + qnaContent +"\n"+
+			   "qnaSecret : " + qnaSecret+"\n"+
+			   "memberNo : " + memberNo+"\n"+
+			   "createDate : " + createDate +"\n"+
+			   "updateDate : " + updateDate +"\n";
+	
+	}
+	
 }

@@ -1,6 +1,6 @@
 package vo;
 
-// join을 위해 부득이하게 만든 클래스임.
+// join�쓣 �쐞�빐 遺��뱷�씠�븯寃� 留뚮뱺 �겢�옒�뒪�엫.
 public class OrderEbookMember {
 	private Order order;
 	private Ebook ebook;
@@ -24,5 +24,22 @@ public class OrderEbookMember {
 	public void setMember(Member member) {
 		this.member = member;
 	}
+	
+	public String toString() {
+		
+		return "┌-------------------------------┐\n"+
+			   "|             Order             |\n"+
+			   "└-------------------------------┘\n"+
+			   order.toString() +"\n"+
+			   "┌-------------------------------┐\n"+
+			   "|             Ebook             |\n"+
+			   "└-------------------------------┘\n"+
+			   ebook.toString() +"\n"+
+			   "┌-------------------------------┐\n"+
+			   "|             Member            |\n"+
+			   "└-------------------------------┘\n"+
+			   member.toString() +"\n";
+	
+	}	
 	
 }

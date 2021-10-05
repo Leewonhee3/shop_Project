@@ -113,7 +113,7 @@
 							
 							%>
 							
-									<td><a href="#">수정</a></td>
+									<td><a href="<%=request.getContextPath()%>/updateQnAForm.jsp?memberNo=<%=q.getMemberNo()%>&qnaNo=<%=q.getQnaNo()%>">수정</a></td>
 									<td><a href="<%=request.getContextPath()%>/deleteQnAAction.jsp?memberNo=<%=q.getMemberNo()%>&qnaNo=<%=q.getQnaNo()%>">삭제</a></td>
 							
 							<%

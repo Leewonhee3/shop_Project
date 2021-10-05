@@ -68,5 +68,18 @@ public class Member {
 		this.createDate = createDate;
 	}
 	
+	public String toString() {
+		
+		return "memberNo : " + memberNo +"\n"+
+			   "memberId : " + memberId +"\n"+
+			   "memberPw : " + memberPw +"\n"+
+			   "memberLevel : " + memberLevel +"\n"+
+			   "memberName : " + memberName +"\n"+
+			   "memberAge : " + memberAge +"\n"+
+			   "memberGender : " + memberGender +"\n"+
+			   "createDate : " + createDate +"\n"+
+			   "updateDate : " + updateDate +"\n";
+	
+	}
 	
 }

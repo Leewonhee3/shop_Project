@@ -13,6 +13,10 @@
 	QnADao qnaDao = new QnADao();
 	QnA qna = qnaDao.selectQnAOne(qnaNo);
 	
+	QnAComment qnaComment = new QnAComment();
+	QnACommentDao qnaCommentDao = new QnACommentDao();
+	
+	qnaComment = qnaCommentDao.selectQnACommentOne(qnaNo);
 	
 %>
 
@@ -31,7 +35,7 @@
 		<!-- start : mainmenu include -->
 		<div>
 			
-			<jsp:include page="/partial/mainMenu.jsp"></jsp:include>
+			<jsp:include page="/partial/mainMenu/mainMenu.jsp"></jsp:include>
 			
 		</div>
 		<!-- end : mainmenu include -->
@@ -74,7 +78,78 @@
 			
 		</table>
 		
-	
+		<table border="1">
+			
+			<thead>
+				
+				<th>답변자</th>
+				<th>답변일</th>
+				
+				
+			</thead>
+		
+			<tbody>
+				
+				<%
+				
+				if(qnaComment.getMemberNo() == 0 || qnaComment.getCreateDate() == null || qnaComment.getQnaCommentContent() == null){
+					
+				%>
+					
+					<td>답변대기중</td>
+					<td></td>
+					
+				<%	
+					
+				}else{
+				
+				%>
+				
+					<td><%=memberDao.selectMemberConvertName(qnaComment.getMemberNo()) %></td>
+					<td><%=qnaComment.getCreateDate() %></td>
+				
+				<%
+				
+				}
+				
+				%>
+				
+			</tbody>
+				
+			<div>
+				
+				<%
+				
+				if(qnaComment.getMemberNo() == 0 || qnaComment.getCreateDate() == null || qnaComment.getQnaCommentContent() == null){
+					
+				%>
+				
+					<td>작성내용</td>
+					<td>아직 답변이 작성되지 않았습니다.</td>
+					
+				<%	
+					
+				}else{
+				
+				%>
+				
+					<tr>
+					
+						<td>작성내용</td>
+						<td><%=qnaComment.getQnaCommentContent() %></td>
+						
+					</tr>
+				
+				<%
+				
+				} 
+				
+				%>
+			
+			</div>
+					
+		</table>
+		
 	</body>
 
 </html>

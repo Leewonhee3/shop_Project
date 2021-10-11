@@ -25,7 +25,7 @@
 	
 	MemberDao memberDao = new MemberDao();
 	QnADao qnaDao = new QnADao();
-	ArrayList<QnA> qnaList = qnaDao.selectQnAListAll(beginRow, ROW_PER_PAGE);
+	ArrayList<QnA> qnaList = qnaDao.selectAnsweredQnAList(beginRow, ROW_PER_PAGE);
 	
 	System.out.println(qnaList.size()+"<------- selectQnAList - qnaList size");
 	
@@ -43,15 +43,15 @@
 	
 	<body>
 	
-		<!-- start : mainmenu include -->
+		<!-- start : adminmenu include -->
 		<div>
 			
-			<jsp:include page="/partial/mainMenu/mainMenu.jsp"></jsp:include>
+			<jsp:include page="/partial/adminMenu.jsp"></jsp:include>
 			
 		</div>
-		<!-- end : mainmenu include -->
+		<!-- end : adminmenu include -->
 	
-		<h2>Q&A게시판</h2>
+		<h2>Q&A 답변 목록</h2>
 		
 		<table border="1">
 		
@@ -88,7 +88,7 @@
 								if(q.getQnaSecret().equals("Y")){
 									
 							%>
-									<td width ="500"><a href="selectQnAOne.jsp?qnaNo=<%=q.getQnaNo()%>"><%=q.getQnaTitle()%></a><img src="<%=request.getContextPath()%>/img/lock.jpg" width="15" height="15"></td>
+									<td width ="500"><a href="<%=request.getContextPath() %>/admin/selectQnAOneAnswer.jsp?qnaNo=<%=q.getQnaNo()%>"><%=q.getQnaTitle()%></a><img src="<%=request.getContextPath()%>/img/lock.jpg" width="15" height="15"></td>
 							
 							<%		
 									
@@ -96,7 +96,7 @@
 							
 							%>
 							
-									<td width ="500"><a href="selectQnAOne.jsp?qnaNo=<%=q.getQnaNo()%>"><%=q.getQnaTitle()%></a></td>	
+									<td width ="500"><a href="<%=request.getContextPath() %>/admin/selectQnAOneAnswer.jsp?qnaNo=<%=q.getQnaNo()%>"><%=q.getQnaTitle()%></a></td>	
 							
 							<%		
 							

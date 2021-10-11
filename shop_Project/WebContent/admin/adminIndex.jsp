@@ -11,10 +11,18 @@
    		return;
 	
 	} // 세션이 null이거나 레벨이 0인경우 일반 인덱스 페이지로 이동 
+	int currentPage=1;
+	int ROW_PER_PAGE=5;
+	int beginRow = (currentPage-1)*ROW_PER_PAGE;
+	
 	
 	MemberDao memberDao = new MemberDao();
 	NoticeDao noticeDao = new NoticeDao();
+	QnADao qnaDao = new QnADao();
+	
 	ArrayList<Notice> noticeList = noticeDao.selectNoticeNewest();
+	ArrayList<QnA> QnAList = qnaDao.selectWaitingQnAList(beginRow, ROW_PER_PAGE);
+	
 	
 %>
 <!DOCTYPE html>
@@ -133,7 +141,7 @@
 					
 					<tr>
 					      
-						<td><br><a href="<%=request.getContextPath()%>/admin/selectQnABoardList.jsp">QnA게시판 관리</a></td>
+						<td><br><a href="<%=request.getContextPath()%>/admin/selectQnAList.jsp">QnA게시판 관리</a></td>
 						<td>QnA게시판을 관리하는 기능입니다.</td>
 					        
 					</tr>
@@ -148,6 +156,8 @@
 		<br>
 		
 		<div>&nbsp<a class="btn btn-primary btn-sm" href="<%=request.getContextPath()%>/index.jsp">메인페이지로 가기</a></div>
+		
+		<h2>최근 공지사항</h2>
 		
 		<table border="1">
 			
@@ -189,6 +199,49 @@
 			</tbody>
 			
 		</table>	
+	
+		<h2>답변대기중인 QnA</h2>
+		
+		<table border="1">
+			
+			<thead>
+					
+				<tr>
+					
+					<th>게시번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+						
+				</tr>
+				
+			</thead>
+				
+			<tbody>
+					
+				<%
+						
+					for(QnA q : QnAList){
+					System.out.println(q.getQnaNo());
+				%>
+					
+						<tr>
+							
+							<td><%=q.getQnaNo() %></td>
+							<td width ="500"><a href="<%=request.getContextPath() %>/admin/insertQnACommentForm.jsp?qnaNo=<%=q.getQnaNo()%>"><%=q.getQnaTitle()%></a></td>
+							<td><%=memberDao.selectMemberConvertName(q.getMemberNo()) %></td>
+							<td><%=q.getCreateDate() %></td>
+							
+						</tr>
+					
+				<% 
+							
+					}
+				%>
+					
+			</tbody>
+			
+		</table>
 	
 	</body>
 	

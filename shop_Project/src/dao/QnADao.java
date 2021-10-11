@@ -178,10 +178,34 @@ public class QnADao {
 	
 	// qna Waiting select
 	
-	public ArrayList<QnA> selectWaitingQnAList() {
+	public ArrayList<QnA> selectWaitingQnAList(int beginRow, int ROW_PER_PAGE) throws ClassNotFoundException, SQLException {
 		
 		ArrayList<QnA> list = new ArrayList<QnA>();
+		QnA qna = null;
+		DBUtil dbutil = new DBUtil();
 		
+		Connection conn = dbutil.getConnection();
+		String sql="SELECT q.*, qc.* FROM qna q LEFT JOIN qna_comment qc ON q.qna_no = qc.qna_no WHERE qc.qna_no IS NULL ORDER BY q.create_date ASC LIMIT ?,?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, beginRow);
+		stmt.setInt(2, ROW_PER_PAGE);
+		System.out.println(stmt+"<-----dao.selectWaitingQnAList - stmt");//check
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			qna = new QnA();
+			qna.setQnaNo(rs.getInt("q.qna_no"));
+			qna.setQnaCategory(rs.getString("q.qna_category"));
+			qna.setQnaTitle(rs.getString("q.qna_title"));
+			qna.setQnaSecret(rs.getString("q.qna_secret"));
+			qna.setMemberNo(rs.getInt("q.member_no"));
+			qna.setCreateDate(rs.getString("q.create_date"));
+			qna.setUpdateDate(rs.getString("q.update_date"));
+		
+			list.add(qna);
+			
+		}
 		
 		return list;
 	}
@@ -191,4 +215,40 @@ public class QnADao {
 	public void QnACount() {
 		
 	}
+	
+	
+	//qna selectAnsweredQnAList
+	
+	public ArrayList<QnA> selectAnsweredQnAList(int beginRow, int ROW_PER_PAGE) throws ClassNotFoundException, SQLException {
+		
+		ArrayList<QnA> list = new ArrayList<QnA>();
+		QnA qna = null;
+		DBUtil dbutil = new DBUtil();
+		
+		Connection conn = dbutil.getConnection();
+		String sql="SELECT q.*, qc.* FROM qna q LEFT JOIN qna_comment qc ON q.qna_no = qc.qna_no WHERE qc.qna_no IS NOT NULL ORDER BY q.create_date ASC LIMIT ?,?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, beginRow);
+		stmt.setInt(2, ROW_PER_PAGE);
+		System.out.println(stmt+"<-----dao.selectAnsweredQnAList - stmt");//check
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			qna = new QnA();
+			qna.setQnaNo(rs.getInt("q.qna_no"));
+			qna.setQnaCategory(rs.getString("q.qna_category"));
+			qna.setQnaTitle(rs.getString("q.qna_title"));
+			qna.setQnaSecret(rs.getString("q.qna_secret"));
+			qna.setMemberNo(rs.getInt("q.member_no"));
+			qna.setCreateDate(rs.getString("q.create_date"));
+			qna.setUpdateDate(rs.getString("q.update_date"));
+		
+			list.add(qna);
+			
+		}
+		
+		return list;
+	}
+	
 }

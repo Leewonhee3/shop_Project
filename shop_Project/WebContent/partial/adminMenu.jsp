@@ -3,12 +3,14 @@
 <%@ page import = "vo.*" %>
 
 <%
+
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	if(loginMember == null || loginMember.getMemberLevel() < 1) {
   	response.sendRedirect(request.getContextPath()+"/index.jsp");
    	return;
 	
 	} // 세션이 null이거나 레벨이 0인경우 일반 인덱스 페이지로 이동 
+
 %>
 
 <!DOCTYPE html>
@@ -82,7 +84,7 @@
 		    	
 		    	<li class="nav-item">
 		      	
-		      		<a class="nav-link" href="<%=request.getContextPath()%>/admin/selectQnABoardList.jsp">[QnA게시판 관리]</a>
+		      		<a class="nav-link" href="<%=request.getContextPath()%>/admin/selectQnAList.jsp">[QnA게시판 관리]</a>
 		    	
 		    	</li>
 		    	

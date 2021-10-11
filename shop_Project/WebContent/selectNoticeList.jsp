@@ -36,7 +36,7 @@
 		<!-- start : mainmenu include -->
 		<div>
 			
-			<jsp:include page="/partial/mainMenu.jsp"></jsp:include>
+			<jsp:include page="/partial/mainMenu/mainMenu.jsp"></jsp:include>
 			
 		</div>
 		<!-- end : mainmenu include -->

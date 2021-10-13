@@ -100,8 +100,6 @@ public class EbookDao {
 	}
 	
 	
-	
-	//[占쏙옙占쏙옙占쏙옙]책 占싱뱄옙占쏙옙 占쏙옙占쏙옙
 	public void updateEbookImg(Ebook ebook) throws ClassNotFoundException, SQLException {
 		DBUtil dbutil = new DBUtil();
 		Connection conn = dbutil.getConnection();
@@ -119,7 +117,7 @@ public class EbookDao {
 		Ebook ebook = null;
 		DBUtil dbutil = new DBUtil();
 		Connection conn = dbutil.getConnection();
-		String sql="SELECT ebook_no, ebook_img, ebook_price FROM ebook WHERE ebook_no=?";
+		String sql="SELECT ebook_no, ebook_title, ebook_author, ebook_company, ebook_page_count, ebook_summary, ebook_state, ebook_isbn, ebook_img, ebook_price FROM ebook WHERE ebook_no=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, ebookNo);
 		System.out.println(stmt+"<----dao.selectEbookOne - stmt"); //check stmt
@@ -129,13 +127,82 @@ public class EbookDao {
 			ebook.setEbookNo(rs.getInt("ebook_no"));
 			ebook.setEbookImg(rs.getString("ebook_img"));
 			ebook.setEbookPrice(rs.getInt("ebook_price"));
+			ebook.setEbookAuthor(rs.getString("ebook_author"));
+			ebook.setEbookTitle(rs.getString("ebook_title"));
+			ebook.setEbookSummary(rs.getString("ebook_summary"));
+			ebook.setEbookISBN(rs.getString("ebook_isbn"));
+			ebook.setEbookState(rs.getString("ebook_state"));
+			ebook.setEbookPageCount(rs.getInt("ebook_page_count"));
+			ebook.setEbookCompany(rs.getString("ebook_company"));
 		}
 		return  ebook;
 		
 	}
 	
+	//[admin/user/all] select search option for ebook
+	public ArrayList<Ebook> selectSearchEbookList(int beginRow, int ROW_PER_PAGE, String option, String searchText) throws ClassNotFoundException, SQLException{
+		ArrayList<Ebook> list = new ArrayList<Ebook>();
+		/*
+		 * SELECT ebook_no, category_name, ebook_title, ebook_state FROM ebook ORDER BY create_date DESC LIMIT ?,?
+		 */
+		DBUtil dbutil = new DBUtil();
+		Connection conn = dbutil.getConnection();
+		Ebook ebook = null;
+		String sql="";
+		PreparedStatement stmt = null;
+		if(option.equals("통합검색")) {
+			
+			sql="SELECT ebook_no, category_name, ebook_title, ebook_author, ebook_state, ebook_img, ebook_price FROM ebook "
+					+ "WHERE category_name LIKE ? OR ebook_title LIKE ? OR ebook_author LIKE ? "
+					+ "ORDER BY create_date ASC LIMIT ?,?";
+
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, "%"+searchText+"%");
+			stmt.setString(2, "%"+searchText+"%");
+			stmt.setString(3, "%"+searchText+"%");
+			stmt.setInt(4, beginRow); 
+			stmt.setInt(5, ROW_PER_PAGE); 
+			
+		}else{
+			
+			sql="SELECT ebook_no, category_name, ebook_title, ebook_author, ebook_state, ebook_img, ebook_price FROM ebook "
+					+ "WHERE category_name = ? AND (ebook_title LIKE ? OR ebook_author LIKE ?)"
+					+ " ORDER BY create_date ASC LIMIT ?,?";
+			
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, option);
+			stmt.setString(2, "%"+searchText+"%");
+			stmt.setString(3, "%"+searchText+"%");
+			stmt.setInt(4, beginRow); 
+			stmt.setInt(5, ROW_PER_PAGE); 
+			
+		}
+		
+		System.out.println(stmt+"<------ dao.selectSearchEbookList - stmt"); 
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			ebook = new Ebook();
+			ebook.setEbookNo(rs.getInt("ebook_no")); 
+			ebook.setCategoryName(rs.getString("category_name")); 
+			ebook.setEbookTitle(rs.getString("ebook_title")); 
+			ebook.setEbookAuthor(rs.getString("ebook_author"));
+			ebook.setEbookState(rs.getString("ebook_state")); 
+			ebook.setEbookImg(rs.getString("ebook_img"));
+			ebook.setEbookPrice(rs.getInt("ebook_price"));
+			list.add(ebook);
+			
+		}
+		
+		System.out.println("select ok from ebook");
+		rs.close(); 
+		stmt.close();
+		conn.close();
+			
+		return list;
+		
+	}
 	
-	//[占쏙옙占쏙옙占쏙옙] ebook 占쏙옙체 占쏙옙회
+	//[admin/user/all] select all ebook 
 	public ArrayList<Ebook> selectEbookList(int beginRow, int ROW_PER_PAGE) throws ClassNotFoundException, SQLException{
 		ArrayList<Ebook> list = new ArrayList<Ebook>();
 		/*
@@ -171,7 +238,7 @@ public class EbookDao {
 		return list;
 		
 	}
-	//[占쏙옙占쏙옙占쏙옙] ebook 카占쌓곤옙占쏙옙 占쏙옙회  [admin/guest] ebook list print
+	//[admin/guest] ebook list print
 	public ArrayList<Ebook> selectEbookListByCategory(int beginRow, int ROW_PER_PAGE, String categoryName) throws ClassNotFoundException, SQLException{
 		ArrayList<Ebook> list = new ArrayList<Ebook>();
 		
@@ -182,22 +249,24 @@ public class EbookDao {
 		DBUtil dbutil = new DBUtil();
 		Connection conn = dbutil.getConnection();
 		Ebook ebook = null;
-		String sql="SELECT ebook_no, category_name, ebook_title, ebook_state, ebook_img, ebook_price FROM ebook WHERE category_name=?"
-				+" ORDER BY create_date ASC LIMIT ?,?"; // 첫占쏙옙째 占쏙옙占싸울옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙짜占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙
+		String sql="SELECT ebook_no, category_name, ebook_title, ebook_author, ebook_company, ebook_state, ebook_img, ebook_price FROM ebook WHERE category_name=?"
+				+" ORDER BY create_date ASC LIMIT ?,?"; 
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, categoryName);
-		stmt.setInt(2, beginRow); // 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
-		stmt.setInt(3, ROW_PER_PAGE); // 표占쏙옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙
-		System.out.println(stmt+"<------ dao.selectEbookListByCategory - stmt"); //占쏙옙占쏙옙 占쏙옙 占식띰옙占쏙옙占� 확占쏙옙
+		stmt.setInt(2, beginRow); 
+		stmt.setInt(3, ROW_PER_PAGE);
+		System.out.println(stmt+"<------ dao.selectEbookListByCategory - stmt"); 
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
 			ebook = new Ebook();
-			ebook.setEbookNo(rs.getInt("ebook_no")); //占쏙옙호 int
-			ebook.setCategoryName(rs.getString("category_name")); //카占쌓곤옙占쏙옙 String
-			ebook.setEbookTitle(rs.getString("ebook_title")); // 占싱몌옙 String
-			ebook.setEbookState(rs.getString("ebook_state")); // 占실매삼옙占쏙옙 String
+			ebook.setEbookNo(rs.getInt("ebook_no")); // int
+			ebook.setCategoryName(rs.getString("category_name"));  //String
+			ebook.setEbookTitle(rs.getString("ebook_title")); //  String
+			ebook.setEbookState(rs.getString("ebook_state")); //  String
 			ebook.setEbookImg(rs.getString("ebook_img"));
 			ebook.setEbookPrice(rs.getInt("ebook_price"));
+			ebook.setEbookCompany(rs.getString("ebook_company"));
+			ebook.setEbookAuthor(rs.getString("ebook_author"));
 			list.add(ebook);
 			
 		}

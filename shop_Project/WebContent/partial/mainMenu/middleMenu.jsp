@@ -23,29 +23,28 @@
 	    		
 	    		<li class="nav-item active text-primary">
 	      			
-	      			<a class="nav-link text-primary" href="#">베스트</a>
+	      			<a class="nav-link text-primary" href="<%=request.getContextPath() %>/selectEbookList.jsp?pageType=best">베스트</a>
 	    		
 	    		</li>
 	    		
 	    		<li class="nav-item active text-primary">
 	      			
-	      			<a class="nav-link text-primary" href="#">신상품</a>
+	      			<a class="nav-link text-primary" href="<%=request.getContextPath() %>/selectEbookList.jsp?pageType=newest">신상품</a>
 	    		
 	    		</li>
 	    
 	    		<li class="nav-item active text-primary">
 	      
-	      			<a class="nav-link text-primary" href="#">이벤트</a>
+	      			<a class="nav-link text-primary" href="#" id="event">이벤트</a>
 	    		
 	    		</li>
 	    		
 	    		<li class="nav-item active text-primary">
 	      
-	      			<a class="nav-link text-primary" href="#">블로그</a>
+	      			<a class="nav-link text-primary" href="#" id="blog">블로그</a>
 	    		
 	    		</li>
 	    		
-	    		<div class="px-5"></div>
 	    		<div class="px-5"></div>
 	    		<div class="px-5"></div>
 	    		<div class="px-5"></div>
@@ -61,5 +60,21 @@
 		</nav>
 	
 	</body>
+	
+	<script>
+		
+		$("#event").click(function(){
+			
+			alert("준비중입니다..");
+			
+		});
+		
+		$("#blog").click(function(){
+			
+			alert("준비중입니다..");
+			
+		});
+	
+	</script>
 	
 </html>

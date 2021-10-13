@@ -20,26 +20,27 @@
 		<title>Insert title here</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!-- jquery -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 	</head>
 
 	<body>
-		
-		<!-- start : submenu include -->
+	
+		<!-- start : serviceArea include -->
 		<div>
-			
-			<jsp:include page="/partial/mainMenu/mainMenu.jsp"></jsp:include>
-			
+		
+			<jsp:include page="/partial/loginMenu/topMenu.jsp"></jsp:include>
+		
 		</div>
-		<!-- end : submenu include -->
+		
+		<!-- end : serviceArea include -->
 		
 		<form method="post" action="<%=request.getContextPath() %>/loginFormAction.jsp" id ="loginForm">
 			
 			<div class="form-inline" "container row" style="float: none; margin:100 auto;">
 				
 				<div class="col-md-3" style="float: none; margin:0 auto;">
-						
-					<h1>로그인 화면</h1>
 					
 					<div>
 					
@@ -66,7 +67,9 @@
 					</div>
 					
 					<button id="loginBtn" type= "button">로그인</button> <!--  21.09.28 don't using submit  -->
-				
+					
+					<button id="insertBtn" type= "button">회원가입</button>
+					
 				</div>
 				
 			</div>		
@@ -93,6 +96,12 @@
 					$('#loginForm').submit();
 					
 				}
+				
+			});
+			
+			$('#insertBtn').click(function(){
+				
+				location.href="insertMemberForm.jsp";
 				
 			});
 		

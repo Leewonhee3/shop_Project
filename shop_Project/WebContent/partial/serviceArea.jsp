@@ -60,7 +60,7 @@
 						
 					%>
 					
-					<h2>신상품 목록</h2>
+					<h2>최신 도서 TOP5</h2>
 					
 					<table border="1">
 						
@@ -74,10 +74,19 @@
 						%>
 							
 							<td>
-							
-									<div><img src="<%=request.getContextPath()%>/image/<%=e.getEbookImg() %>" width="200" height="200"></div>
-									<div><%=e.getEbookTitle()%></div>
-									<div>₩ <%=e.getEbookPrice()%></div>
+								
+								<div>
+								
+									<a href="<%=request.getContextPath()%>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>">
+								
+										<img src="<%=request.getContextPath()%>/img/<%=e.getEbookImg() %>" width="200" height="200">
+								
+									</a>
+								
+								</div>
+								
+								<div><%=e.getEbookTitle()%></div>
+								<div>₩ <%=e.getEbookPrice()%></div>
 							
 							</td>
 						
@@ -91,7 +100,7 @@
 					
 					</table>
 					
-					<h2>인기 상품 목록</h2>
+					<h2>인기 도서 TOP5</h2>
 					
 					<table border="1">
 						
@@ -110,7 +119,7 @@
 										
 										<a href="<%=request.getContextPath()%>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>">
 											
-											<img src="<%=request.getContextPath()%>/image/<%=e.getEbookImg() %>" width="200" height="200">
+											<img src="<%=request.getContextPath()%>/img/<%=e.getEbookImg() %>" width="200" height="200">
 										
 										</a>
 									
@@ -132,7 +141,7 @@
 					
 					</table>
 					
-					<h2>전체 상품 목록</h2>
+					<h2>전체 도서 목록</h2>
 					
 					<table border="1">
 						
@@ -146,9 +155,20 @@
 						%>
 							
 							<td>
-									<div><img src="<%=request.getContextPath()%>/image/<%=e.getEbookImg() %>" width="200" height="200"></div>
-									<div><%=e.getEbookTitle()%></div>
-									<div>₩ <%=e.getEbookPrice()%></div>
+								
+								<div>
+								
+									<a href="<%=request.getContextPath()%>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>">
+								
+										<img src="<%=request.getContextPath()%>/img/<%=e.getEbookImg() %>" width="200" height="200">
+								
+									</a>
+								
+								</div>		
+							
+								<div><%=e.getEbookTitle()%></div>
+								<div>₩ <%=e.getEbookPrice()%></div>
+							
 							</td>
 							
 						<%
@@ -242,49 +262,6 @@
 						%>
 					
 				</div>
-				
-				<h2>공지사항</h2>
-				
-				<table border="1">
-					
-					<thead>
-							
-						<tr>
-							
-							<th>게시번호</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
-								
-						</tr>
-						
-					</thead>
-						
-					<tbody>
-							
-						<%
-								
-							for(Notice n : noticeList){
-							
-						%>
-							
-								<tr>
-									
-									<td><%=n.getNoticeNo() %></td>
-									<td width ="500"><a href="<%=request.getContextPath() %>/selectNoticeOne.jsp?noticeNo=<%=n.getNoticeNo()%>"><%=n.getNoticeTitle()%></a></td>
-									<td><%=memberDao.selectMemberConvertName(n.getMemberNo()) %></td>
-									<td><%=n.getCreateDate() %></td>
-									
-								</tr>
-							
-						<% 
-									
-							}
-						%>
-							
-					</tbody>
-					
-				</table>
 			
 		</div>
 		

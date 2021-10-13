@@ -41,7 +41,7 @@
 	<body>
 		
 		<div class="container mt-3">
-		
+			
 			<div class="row">
 	  			
 	  			<div class="col-sm-3.5">
@@ -57,60 +57,67 @@
 					<br>
 					<br>
 					
-					<div class="input-group mb-3" >
-  						
-  						<div class="input-group-prepend border border-primary border-5">
-    						
-    						<div class="pull-right">
-    							
-    							<h6><small></small></h6>
-    							
-	    						<select class="selectpicker" data-width="150px">
-									
-									<option selected="selected">통합검색</option>
-									
-									<option data-divider="true"></option>
-									
-								    <%
-	      							
-	      								for(Category c : categoryList){
-	      							%>
-	      								
-	      									<option><%=c.getCategoryName() %></option>
-	      										
-	      							<%		
-	      							
-	      								}
-	      							
-	      							%>
-	      							
-	      							<option>리뷰</option>
-	      							
-	      							<option data-divider="true"></option>
-	      							
-	      							<option>상세검색</option>
-	      							
-								</select>
-							
-							</div>
-							
-							<div>
-							
-								<h6><small></small></h6>
+					<form action="<%=request.getContextPath() %>/searchResultList.jsp" method="post" id="btnTarget" name="btnTarget">
+					
+						<div class="input-group mb-3" >
+	  						
+	  						<div class="input-group-prepend border border-primary border-5">
+	    						
+	    						<div class="pull-right">
+	    							
+	    							<h6><small></small></h6>
+	    							
+		    						<select class="selectpicker" data-width="150px" id="slt" name="slt">
+										
+										<option selected="selected" value="통합검색">통합검색</option>
+										
+										<option data-divider="true"></option>
+										
+									    <%
+		      							
+		      								for(Category c : categoryList){
+		      							
+		      							%>
+		      								
+		      									<option value="<%=c.getCategoryName() %>"><%=c.getCategoryName() %></option>
+		      										
+		      							<%		
+		      							
+		      								}
+		      							
+		      							%>
+		      							
+		      							<option data-divider="true"></option>
+		      							
+		      							<option value="리뷰">리뷰</option>
+		      							
+		      							<option data-divider="true"></option>
+		      							
+		      							<option value="상세검색">상세검색</option>
+		      							
+									</select>
 								
-								<input type="text" class="form-control" aria-label="Text input with dropdown button" size="40">
+								</div>
 								
-							</div>	
-							
-							<div class="input-group-append">
-							    						
-    							<img src="<%=request.getContextPath()%>/img/searchBtn.PNG" height="54" >
-  								
-  							</div>
+								<div>
+								
+									<h6><small></small></h6>
 									
-    					</div>
-  						
-  					</div>
+									<input type="text" class="form-control" aria-label="Text input with dropdown button" size="40"  id="text" name="text">
+									
+								</div>	
+								
+								<div class="input-group-append">
+								    						
+	    							<a id="searchBtn" href="#"><img src="<%=request.getContextPath()%>/img/searchBtn.PNG" height="54" ></a>
+	  								
+	  							</div>
+										
+	    					</div>
+	  						
+	  					</div>
+  				
+  					</form>
   					
 				</div>
 				
@@ -120,4 +127,26 @@
 		
 	</body>
 
+	<script>
+			
+		$("#searchBtn").click(function(){
+			
+			let selected = $("#slt").val();
+			let text = $("#text").val();
+			
+			if (text == "") { 
+				
+				alert("검색어를 입력해 주십시오."); 
+				return; 
+			
+			}else{
+			
+				$("#btnTarget").submit();
+				
+			}
+			
+		});
+		
+	</script>
+	
 </html>

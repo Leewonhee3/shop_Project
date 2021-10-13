@@ -1,37 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="vo.*" import="dao.*" import="java.util.*" %>
+<%@page import="java.util.*" import="dao.*" import="vo.*" %>
 
 <%
-	request.setCharacterEncoding("utf-8");	
+
+	request.setCharacterEncoding("utf-8"); //encoding
+	int currentPage= 1; 
 	
-	//login check and need write value
-	Member member = new Member();
-	
-	if(session.getAttribute("loginMember") != null) {
-		
-		member = (Member)session.getAttribute("loginMember");
-	
-	}
-	
-	int currentPage = 1; 
 	if(request.getParameter("currentPage") != null){ // currentPage not null
+		
 		currentPage= Integer.parseInt(request.getParameter("currentPage"));
 	}
+	
 	final int ROW_PER_PAGE = 10; // const
 		
 	int beginRow = (currentPage-1)*ROW_PER_PAGE;
 	
-	MemberDao memberDao = new MemberDao();
-	QnADao qnaDao = new QnADao();
-	ArrayList<QnA> qnaList = qnaDao.selectQnAListAll(beginRow, ROW_PER_PAGE);
+	String selected = request.getParameter("slt");
+	String text = request.getParameter("text");
 	
-	System.out.println(qnaList.size()+"<------- serviceCenterIndex - qnaList size");	
-
-
-	NoticeDao noticeDao = new NoticeDao();
-	ArrayList<Notice> noticeList = noticeDao.selectNoticeNewest();
-
+	//check
+	System.out.println(request.getParameter("slt")+"<----------- searchBarAction - slt");
+	System.out.println(request.getParameter("text")+"<----------- searchBarAction - text");
+	
+	EbookDao ebookDao = new EbookDao();
+	ArrayList<Ebook> ebookList = ebookDao.selectSearchEbookList(beginRow, ROW_PER_PAGE, selected, text);
+	
 %>
 
 <!DOCTYPE html>
@@ -98,144 +92,127 @@
 		</div>	
 		<!-- end : middlemenu include -->
 		
-		<div class="row">
+		<!-- 여기까지 메뉴바를 가지는 모든 페이지가 동일함. -->
+		
+		<div class="container-fluid row">
 			
-			<div class="col-sm-2"></div>
+			<div class="col-sm-2">
+			
+				<nav class="nav justify-content-end">
 				
+					<!-- start : serviceArea include -->
+					<div>
+			
+						<jsp:include page="/partial/categorySideBar.jsp"></jsp:include>
+			
+					</div>
+			
+					<!-- end : serviceArea include -->
+				
+				</nav>
+				
+			</div>
+			
 			<div class="col">
-			
-				<h2>QnA 게시판</h2>
-				
-				<table border="1">
-			
-				<thead>
+
+				<table class="table table-bordered">
 					
-					<tr>
-					
-						<th>게시번호</th>
-						<th>카테고리</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>수정</th>
-						<th>삭제</th>
+					<thead>
 						
-					</tr>
-				
-				</thead>
-				
-				<tbody>
+						<tr>
+							
+							<th><center>도서이미지</center></th>
+							<th><center>도서명</center></th>
+							<th><center>작가</center></th>
+							<th><center>출판사</center></th>
+							<th><center>가격</center></th>
+							
+						</tr>
+					
+					</thead>
+					
+					<tbody>
 					
 					<%
 						
-						for(QnA q : qnaList){
+						for (Ebook e : ebookList) {
 					
 					%>
-					
 							<tr>
-							
-								<td><%=q.getQnaNo() %></td>
-								<td><%=q.getQnaCategory() %></td>
+						
+								<td width="200" height="200">
+									
+									<a href="<%=request.getContextPath()%>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>"><img src="<%=request.getContextPath() %>/img/<%=e.getEbookImg() %>" width="200" height="200"></a>
 								
-								<%
-									if(q.getQnaSecret().equals("Y")){
-										
-								%>
-										<td width ="500"><a href="selectQnAOne.jsp?qnaNo=<%=q.getQnaNo()%>"><%=q.getQnaTitle()%></a><img src="<%=request.getContextPath()%>/img/lock.jpg" width="15" height="15"></td>
+								</td>
 								
-								<%		
-										
-									}else{
+								<td>
+									
+									<br>
+									<br>
+									<br>
+									<br>
+									
+									<center><%=e.getEbookTitle() %></center>
 								
-								%>
+								</td>
 								
-										<td width ="500"><a href="selectQnAOne.jsp?qnaNo=<%=q.getQnaNo()%>"><%=q.getQnaTitle()%></a></td>	
+								<td>
+									
+									<br>
+									<br>
+									<br>
+									<br>
+									
+									<center><%=e.getEbookAuthor() %></center>
 								
-								<%		
+								</td>
 								
-									}
+								<td>
+									
+									<br>
+									<br>
+									<br>
+									<br>
+									
+									<center><%=e.getEbookCompany() %></center>
 								
-								%>
-							
-								<td><%=memberDao.selectMemberConvertName(q.getMemberNo()) %></td>
-								<td><%=q.getCreateDate() %></td>
+								</td>
 								
-								<%
+								<td>
+									
+									<br>
+									<br>
+									<br>
+									<br>
+									
+									<center><%=e.getEbookPrice() %></center>
 								
-									if(session.getAttribute("loginMember") != null) {
-								
-								%>
-								
-										<td><a href="<%=request.getContextPath()%>/updateQnAForm.jsp?memberNo=<%=q.getMemberNo()%>&qnaNo=<%=q.getQnaNo()%>">수정</a></td>
-										<td><a href="<%=request.getContextPath()%>/deleteQnAAction.jsp?memberNo=<%=q.getMemberNo()%>&qnaNo=<%=q.getQnaNo()%>">삭제</a></td>
-								
-								<%
-								
-									}
-								
-								%>
+								</td>
 							
 							</tr>
-				
-					<% 
 					
-						}
-					%>
+					<%		
+					
+					}
+			
+					%>	
 						
 					</tbody>
 				
 				</table>
-				
-				<h2>공지사항 게시판</h2>
-							
-				<table border="1">
-								
-					<thead>
-										
-						<tr>
-										
-							<th>게시번호</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
-											
-						</tr>
-									
-					</thead>
-									
-					<tbody>
-										
-					<%
-											
-						for(Notice n : noticeList){
-										
-					%>
-										
-							<tr>
-												
-								<td><%=n.getNoticeNo() %></td>
-								<td width ="500"><a href="<%=request.getContextPath() %>/selectNoticeOne.jsp?noticeNo=<%=n.getNoticeNo()%>"><%=n.getNoticeTitle()%></a></td>
-								<td><%=memberDao.selectMemberConvertName(n.getMemberNo()) %></td>
-								<td><%=n.getCreateDate() %></td>
-												
-							</tr>
-										
-					<% 
-												
-						}
-					
-					%>
-										
-					</tbody>
-								
-				</table>	
-				
+	
 			</div>
 			
-			<div class="col-sm-2"></div>
+			<div class="col-sm-2">
+			
+				need left side bar
+			
+			</div>
+			
 		
 		</div>
-		
+
 	</body>
-	
+
 </html>

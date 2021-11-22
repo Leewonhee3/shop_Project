@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<!-- ajax 코드로 구현하기 -->
+	<script>
+	
+	// 페이지별 게시글 목록을 받아오는 함수
+	let boardList = function(lnputPage){
+		$.ajax(
+				{
+					type:'get',
+					url :'http://localhost:8080/api/board/'+lnputPage,
+					success:function(json){
+						$('#list').empty();
+						console.log(json);		
+						$(json).each(function(index, item){
+							$('#list').append('<tr>');
+							$('#list').append('<td>'+item.boardNo+'</td>');
+							$('#list').append('<td>'+item.boardCategory+'</td>');
+							$('#list').append('<td>'+item.boardTitle+'</td>');
+							$('#list').append('<td>'+item.boardUser+'</td>');
+							$('#list').append('<td>'+item.boardDate+'</td>');
+							$('#list').append('</tr>');
+				});
+			}
+				
+		});
+	}
+	// 페이지 로드되면
+	$(document).ready(function(){
+		
+		let currentPage = 1;
+		boardList(currentPage);
+		
+		//버튼 클릭 이벤트
+		
+		$('#preBtn').click(function () {
+			currentPage -= 1;
+			boardList(currentPage);
+		});
+		
+		$('#nextBtn').click(function () {
+			currentPage += 1;
+			boardList(currentPage);
+		});
+		
+	});
+	</script>
+
+</head>
+<body>
+	<!-- html에서 서버에 요청할때 사용하는 문법 -> 새로운 html 페이지를 요청 
+	1. a태그
+	2. form
+	
+	요청페이지를 유지한 상태에서 데이터를 요청하는 방법
+	1. ajax(javascript)
+	
+	-->
+	
+	<h1>board</h1>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>no</th>
+				<th>category</th>
+				<th>title</th>
+				<th>user</th>
+				<th>date</th>
+			</tr>
+		</thead>
+		<tbody id="list">
+			
+		</tbody>
+	</table>
+	<div>
+		<button type="button" id="preBtn">이전</button>
+		<button type="button" id="nextBtn">다음</button>
+	</div>
+</body>
+</html>
